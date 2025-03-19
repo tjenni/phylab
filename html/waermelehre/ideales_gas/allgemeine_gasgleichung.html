@@ -1,0 +1,480 @@
+<!doctype html>
+<html lang="de">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Allgemeine Gasgleichung</title>
+
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+        <style>
+            body {
+                font-family: "Georgia", serif;
+                line-height: 1.6;
+                max-width: 900px;
+                margin: 0 auto;
+                padding: 40px;
+                background-color: #fafafa;
+                color: #333;
+            }
+
+            a {
+                color: #333;
+            }
+
+            header {
+                margin-bottom: 30px;
+                border-bottom: 1px solid #ccc;
+            }
+
+            header ul {
+                display: inline-block;
+            }
+
+            header ul > li {
+                display: inline-block;
+                margin-right: 1em;
+            }
+
+            h1,
+            h2,
+            h3,
+            h4 {
+                color: #005288;
+            }
+
+            h1 {
+                font-size: 2.5em;
+            }
+
+            h2 {
+                font-size: 2em;
+                padding-bottom: 5px;
+                margin-top: 40px;
+            }
+
+            hr {
+                border: none;
+                border-top: 1px solid #ccc;
+                margin: 20px 0;
+            }
+
+            nav {
+                background-color: #005288;
+                padding: 0.7em;
+                border-radius: 0.4em;
+            }
+
+            nav a {
+                color: white;
+                text-decoration: none;
+            }
+
+            nav ul {
+                list-style: none;
+                padding-left: 2ex;
+                margin: 0;
+            }
+
+            nav a.active {
+                font-weight: bold;
+                color: #ff6600; /* Orange als Highlight */
+            }
+
+            nav a:hover {
+                text-decoration: underline;
+            }
+
+            nav.breadcrumbs {
+                color: white;
+                background-color: #005288;
+                padding: 0px;
+                margin: 0px;
+            }
+
+            main {
+                margin-top: 20px;
+            }
+
+            footer {
+                margin-top: 50px;
+                border-top: 1px solid #ccc;
+                font-size: 1em;
+                text-align: center;
+                padding-top: 10px;
+            }
+
+            footer img {
+                height: 22px !important;
+                margin-left: 3px;
+                vertical-align: text-bottom;
+            }
+
+            .equation {
+                text-align: center;
+                margin: 20px 0;
+                font-size: 1.2em;
+            }
+
+            .admonition {
+                padding: 10px;
+                border-left: 5px solid;
+                border-radius: 5px;
+                margin: 10px 0;
+            }
+
+            .admonition.info {
+                background-color: #d6eaf8;
+                border-color: #3498db;
+            }
+            .admonition.note {
+                background-color: #d4efdf;
+                border-color: #2ecc71;
+            }
+            .admonition.warning {
+                background-color: #fae5d3;
+                border-color: #e67e22;
+            }
+            .admonition.example {
+                background-color: #ebdef0;
+                border-color: #9b59b6;
+            }
+
+            .admonition.formula {
+                background-color: #d1f2eb;
+                border-color: #1abc9c;
+            }
+            .admonition.problem {
+                border: 1px solid #e74c3c;
+                border-color: #e74c3c;
+            }
+            .admonition.solution {
+                background-color: #d6eaf8;
+                border-color: #2980b9;
+            }
+            .admonition.hint {
+                background-color: #eaeded;
+                border-color: #95a5a6;
+            }
+
+            .admonition.definition {
+                background-color: #fcf3cf;
+                border-color: #f1c40f;
+            }
+            .admonition.theorem {
+                background-color: #e8daef;
+                border-color: #8e44ad;
+            }
+            .admonition.experiment {
+                background-color: #d5dbdb;
+                border-color: #34495e;
+            }
+            .admonition.concept {
+                background-color: #d5f5e3;
+                border-color: #27ae60;
+            }
+
+            .admonition.historical {
+                background-color: #f5cba7;
+                border-color: #d35400;
+            }
+            .admonition.derivation {
+                background-color: #d0ece7;
+                border-color: #16a085;
+            }
+            .admonition.proof {
+                background-color: #d5d8dc;
+                border-color: #7f8c8d;
+            }
+            .admonition.realworld {
+                background-color: #f2d7d5;
+                border-color: #c0392b;
+            }
+            .admonition.faq {
+                background-color: #d4e6f1;
+                border-color: #2c3e50;
+            }
+            .admonition.check {
+                background-color: #fdebd0;
+                border-color: #f39c12;
+            }
+
+            .solution-box {
+                border: 1px solid #2980b9;
+                background-color: #d6eaf8;
+                padding: 10px;
+                margin: 10px 0;
+                border-radius: 5px;
+            }
+
+            .solution-box summary {
+                font-weight: bold;
+                cursor: pointer;
+                padding: 5px;
+            }
+
+            pre,
+            code {
+                background-color: #eee;
+                border-radius: 3px;
+                padding: 3px 6px;
+                font-family: "Courier New", Courier, monospace;
+            }
+
+            pre {
+                padding: 10px;
+                overflow-x: auto;
+            }
+
+            img {
+                max-width: 100%;
+                height: auto;
+            }
+
+            table {
+                border-collapse: collapse;
+                width: 100%;
+            }
+
+            th,
+            td {
+                border-bottom: 1px solid #ddd;
+                padding: 8px;
+                text-align: left;
+            }
+
+            th {
+                background-color: #f2f2f2;
+            }
+
+            tr:nth-child(even) {
+                background-color: #f9f9f9;
+            }
+            tr:nth-child(odd) {
+                background-color: #ffffff;
+            }
+
+            ol[type="a"] {
+                list-style: none; /* Entferne Standard-Listensymbole */
+                counter-reset: list-counter; /* Initialisiere Zähler */
+                padding-left: 0em;
+            }
+
+            ol[type="a"] > li {
+                counter-increment: list-counter; /* Zähler erhöhen */
+                margin-bottom: 1em;
+            }
+
+            ol[type="a"] > li::before {
+                content: counter(list-counter, lower-alpha) ") "; /* a) b) c) */
+            }
+        </style>
+    </head>
+
+    <body>
+        <nav>
+             <nav class='breadcrumbs'><a href="../../index.html">Physikbuch</a> > <a href="../index.html">Wärmelehre</a> > <a href="index.html">Ideales Gas</a></nav> 
+             <nav><ul><li><a href="index.html">Ideales Gas</a></li><li><a href="boyle-marriote.html">Boyle-Mariotte-Gesetz</a></li><li><a href="gay-lussac.html">Gesetz von Gay-Lussac</a></li><li><a href="allgemeine_gasgleichung.html" class="active">Allgemeine Gasgleichung</a></li></ul></nav> 
+        </nav>
+
+        <header>
+            <h1>Allgemeine Gasgleichung</h1>
+            <p>Autoren:  T. Jenni </p>
+            <p> Datum: 8.3.2024 </p>
+        </header>
+
+        <main><h2 id="die-allgemeine-gasgleichung"><strong>Die
+allgemeine Gasgleichung</strong> 💨</h2>
+<p>Die <strong>allgemeine Gasgleichung</strong> beschreibt das Verhalten
+eines idealen Gases und verknüpft die Zustandsgrößen
+<strong>Druck</strong>, <strong>Volumen</strong>,
+<strong>Temperatur</strong> und <strong>Stoffmenge</strong>
+miteinander.</p>
+<p><strong>Formel:</strong> <span class="math display">\[
+p \cdot V = n \cdot R \cdot T
+\]</span></p>
+<h3 id="bedeutung-der-variablen"><strong>Bedeutung der
+Variablen:</strong></h3>
+<ul>
+<li><strong>( p )</strong> = Druck (Pascal, Pa)</li>
+<li><strong>( V )</strong> = Volumen (Kubikmeter, m³)</li>
+<li><strong>( n )</strong> = Stoffmenge (Mol, mol)</li>
+<li><strong>( R )</strong> = <strong>Universelle Gaskonstante</strong>
+((8.314, ))</li>
+<li><strong>( T )</strong> = Temperatur (Kelvin, K)</li>
+</ul>
+<p>📌 <strong>Wichtig:</strong> - Die Temperatur muss in
+<strong>Kelvin</strong> angegeben werden! - ( 0^C = 273.15 K ), also
+gilt: <span class="math display">\[
+  T(K) = T(°C) + 273.15
+  \]</span></p>
+<hr />
+<h2 id="herleitung-der-gasgleichung"><strong>Herleitung der
+Gasgleichung</strong> 🧐</h2>
+<p>Die allgemeine Gasgleichung <strong>kombiniert</strong> zwei
+Gesetze:</p>
+<ol type="1">
+<li><strong>Boyle-Mariotte-Gesetz:</strong> ( p V = ) (bei konstanter
+Temperatur)</li>
+<li><strong>Gesetz von Gay-Lussac:</strong> ( V T ) (bei konstantem
+Druck)</li>
+</ol>
+<p>Durch die Einführung der <strong>Stoffmenge ( n )</strong> erhält man
+die vollständige Beziehung:</p>
+<p><span class="math display">\[
+p \cdot V = n \cdot R \cdot T
+\]</span></p>
+<p>Dieses Gesetz beschreibt das Verhalten <strong>aller idealen
+Gase</strong> unter verschiedenen Bedingungen.</p>
+<hr />
+<h2 id="normbedingungen-für-gase"><strong>Normbedingungen für
+Gase</strong> 📏</h2>
+<p>Um Gase miteinander zu vergleichen, werden oft
+<strong>Standardbedingungen (STP - Standard Temperature and
+Pressure)</strong> verwendet:</p>
+<p>🔹 <strong>Normbedingungen (0°C, 1013 hPa):</strong> -
+<strong>Temperatur:</strong> ( 273.15 K ) - <strong>Druck:</strong> (
+1013.25 hPa = 101325 Pa ) - <strong>Volumen eines Mols Gas:</strong>
+<strong>22.41 Liter</strong></p>
+<p>🔹 <strong>Raumbedingungen (~25°C, 1 atm):</strong> -
+<strong>Temperatur:</strong> ( 298.15 K ) - <strong>Druck:</strong> ( 1
+) atm ( = 101325 ) Pa - <strong>Molvolumen:</strong> <strong>24.47
+Liter</strong></p>
+<p>👉 <strong>Merke:</strong> 1 Mol eines idealen Gases nimmt bei
+Standardbedingungen immer etwa <strong>22.4 Liter</strong> ein.</p>
+<hr />
+<h2 id="beispiele-berechnungen"><strong>Beispiele &amp;
+Berechnungen</strong> ✏️</h2>
+<h3 id="beispiel-berechnung-des-volumens-eines-gases"><strong>1️⃣
+Beispiel: Berechnung des Volumens eines Gases</strong></h3>
+<p>Wie viel Volumen nimmt <strong>1 Mol Sauerstoff (O₂)</strong> bei
+<strong>25°C und 1 atm Druck</strong> ein?</p>
+<p><strong>Gegeben:</strong> - ( n = 1 ) mol - ( p = 101325 ) Pa - ( T =
+25°C = 298.15 K ) - ( R = 8.314 ) J/(mol·K)</p>
+<p><strong>Lösung:</strong> <span class="math display">\[
+V = \frac{n \cdot R \cdot T}{p}
+\]</span> <span class="math display">\[
+V = \frac{1 \cdot 8.314 \cdot 298.15}{101325}
+\]</span> <span class="math display">\[
+V \approx 0.02447 \,\text{m}^3 = 24.47 \,\text{L}
+\]</span></p>
+<p>👉 <strong>Fazit:</strong> 1 Mol Sauerstoff nimmt bei
+<strong>Raumbedingungen</strong> ein Volumen von <strong>24.47
+Litern</strong> ein.</p>
+<hr />
+<h3 id="beispiel-berechnung-der-stoffmenge-eines-gases"><strong>2️⃣
+Beispiel: Berechnung der Stoffmenge eines Gases</strong></h3>
+<p>Wie viele Mol <strong>Kohlendioxid (CO₂)</strong> befinden sich in
+einem <strong>10-Liter-Behälter</strong> bei <strong>20°C und 2 bar
+Druck</strong>?</p>
+<p><strong>Gegeben:</strong> - ( V = 10 ) L = ( 0.01 ) m³ - ( p = 2 )
+bar = ( 200000 ) Pa - ( T = 20°C = 293.15 K )</p>
+<p><strong>Lösung:</strong> <span class="math display">\[
+n = \frac{p \cdot V}{R \cdot T}
+\]</span> <span class="math display">\[
+n = \frac{200000 \cdot 0.01}{8.314 \cdot 293.15}
+\]</span> <span class="math display">\[
+n \approx 0.82 \,\text{mol}
+\]</span></p>
+<p>👉 <strong>Fazit:</strong> In dem Behälter befinden sich <strong>0.82
+Mol CO₂</strong>.</p>
+<hr />
+<h3 id="beispiel-luftdruck-in-einer-gasflasche"><strong>3️⃣ Beispiel:
+Luftdruck in einer Gasflasche</strong></h3>
+<p>Eine <strong>Gasflasche mit 5 Litern Inhalt</strong> enthält
+<strong>0.5 Mol Stickstoff (N₂)</strong> bei <strong>20°C</strong>.
+Welchen Druck übt das Gas aus?</p>
+<p><strong>Gegeben:</strong> - ( n = 0.5 ) mol - ( V = 5 ) L = ( 0.005 )
+m³ - ( T = 20°C = 293.15 K )</p>
+<p><strong>Lösung:</strong> <span class="math display">\[
+p = \frac{n \cdot R \cdot T}{V}
+\]</span> <span class="math display">\[
+p = \frac{0.5 \cdot 8.314 \cdot 293.15}{0.005}
+\]</span> <span class="math display">\[
+p \approx 243683 \,\text{Pa} = 2.43 \,\text{bar}
+\]</span></p>
+<p>👉 <strong>Fazit:</strong> Der Druck in der Flasche beträgt
+<strong>2.43 bar</strong>.</p>
+<hr />
+<h2 id="anwendungen-der-allgemeinen-gasgleichung"><strong>Anwendungen
+der allgemeinen Gasgleichung</strong> 🚀</h2>
+<p>🔹 <strong>Autoreifen:</strong> Warum steigt der Reifendruck im
+Sommer? 🔹 <strong>Flugzeugkabinen:</strong> Wie wird der Druck konstant
+gehalten? 🔹 <strong>Tauchflaschen:</strong> Wie viel Luft steckt in
+einer Pressluftflasche? 🔹 <strong>Meteorologie:</strong> Warum sinkt
+der Luftdruck mit der Höhe?</p>
+<p>📌 <strong>Wichtig:</strong> In der Realität sind Gase nicht immer
+<strong>ideal</strong>, besonders bei hohen Drücken oder tiefen
+Temperaturen. Für reale Gase gibt es die
+<strong>van-der-Waals-Gleichung</strong>.</p>
+<hr />
+<h2 id="aufgaben-zur-allgemeinen-gasgleichung"><strong>Aufgaben zur
+allgemeinen Gasgleichung</strong> 📚</h2>
+<ol type="1">
+<li>Ein <strong>Heliumballon</strong> enthält <strong>3 Liter
+Gas</strong> bei <strong>300 K</strong> und <strong>1 bar</strong>.
+<ol type="a">
+<li>Wie groß ist das Volumen bei <strong>500 K</strong>?</li>
+<li>Was passiert mit dem Ballon, wenn man ihn abkühlt?</li>
+</ol></li>
+<li>Eine <strong>Gasflasche (10 Liter)</strong> enthält <strong>0.4 Mol
+Sauerstoff</strong> bei <strong>25°C</strong>.
+<ol type="a">
+<li>Welchen Druck übt das Gas aus?</li>
+</ol></li>
+<li>Ein <strong>Taucher</strong> atmet bei <strong>10 m
+Wassertiefe</strong> Luft aus einer Pressluftflasche mit <strong>12
+Litern Volumen</strong>. Der Umgebungsdruck beträgt dort <strong>2
+bar</strong>.
+<ol type="a">
+<li>Wie viel Mol Luft enthält die Flasche bei
+<strong>20°C</strong>?</li>
+</ol></li>
+</ol>
+<hr />
+<p>📌 <strong>Zusammenfassung:</strong> ✅ Die allgemeine Gasgleichung
+beschreibt das <strong>Verhalten von idealen Gasen</strong>. ✅
+<strong>Formel:</strong> ( p V = n R T ). ✅ <strong>Gilt für alle Gase
+bei normalen Bedingungen.</strong> ✅ <strong>Anwendungen:</strong>
+Reifen, Tauchflaschen, Meteorologie, Flugzeugkabinen.</p>
+<hr />
+<p>Diese Version enthält <strong>mehr Theorie, praktische Beispiele und
+Anwendungen</strong>. Falls du noch mehr Inhalte möchtest, sag einfach
+Bescheid! 😊🚀</p></main>
+
+        <footer>
+            <p
+                xmlns:cc="http://creativecommons.org/ns#"
+                xmlns:dct="http://purl.org/dc/terms/"
+            >
+                Diese Webseite und alle Inhalte von
+                <span property="cc:attributionName">PhyLab</span> sind
+                lizenziert unter
+                <a
+                    href="https://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1"
+                    target="_blank"
+                    rel="license noopener noreferrer"
+                    style="display: inline-block"
+                    >CC BY-NC-SA 4.0</a
+                >
+
+                <img
+                    src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"
+                    alt=""
+                />
+                <img
+                    src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"
+                    alt=""
+                />
+                <img
+                    src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"
+                    alt=""
+                />
+                <img
+                    src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"
+                    alt=""
+                />
+            </p>
+        </footer>
+    </body>
+</html>

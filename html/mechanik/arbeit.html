@@ -1,0 +1,410 @@
+<!doctype html>
+<html lang="de">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Arbeit</title>
+
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+        <style>
+            body {
+                font-family: "Georgia", serif;
+                line-height: 1.6;
+                max-width: 900px;
+                margin: 0 auto;
+                padding: 40px;
+                background-color: #fafafa;
+                color: #333;
+            }
+
+            a {
+                color: #333;
+            }
+
+            header {
+                margin-bottom: 30px;
+                border-bottom: 1px solid #ccc;
+            }
+
+            header ul {
+                display: inline-block;
+            }
+
+            header ul > li {
+                display: inline-block;
+                margin-right: 1em;
+            }
+
+            h1,
+            h2,
+            h3,
+            h4 {
+                color: #005288;
+            }
+
+            h1 {
+                font-size: 2.5em;
+            }
+
+            h2 {
+                font-size: 2em;
+                padding-bottom: 5px;
+                margin-top: 40px;
+            }
+
+            hr {
+                border: none;
+                border-top: 1px solid #ccc;
+                margin: 20px 0;
+            }
+
+            nav {
+                background-color: #005288;
+                padding: 0.7em;
+                border-radius: 0.4em;
+            }
+
+            nav a {
+                color: white;
+                text-decoration: none;
+            }
+
+            nav ul {
+                list-style: none;
+                padding-left: 2ex;
+                margin: 0;
+            }
+
+            nav a.active {
+                font-weight: bold;
+                color: #ff6600; /* Orange als Highlight */
+            }
+
+            nav a:hover {
+                text-decoration: underline;
+            }
+
+            nav.breadcrumbs {
+                color: white;
+                background-color: #005288;
+                padding: 0px;
+                margin: 0px;
+            }
+
+            main {
+                margin-top: 20px;
+            }
+
+            footer {
+                margin-top: 50px;
+                border-top: 1px solid #ccc;
+                font-size: 1em;
+                text-align: center;
+                padding-top: 10px;
+            }
+
+            footer img {
+                height: 22px !important;
+                margin-left: 3px;
+                vertical-align: text-bottom;
+            }
+
+            .equation {
+                text-align: center;
+                margin: 20px 0;
+                font-size: 1.2em;
+            }
+
+            .admonition {
+                padding: 10px;
+                border-left: 5px solid;
+                border-radius: 5px;
+                margin: 10px 0;
+            }
+
+            .admonition.info {
+                background-color: #d6eaf8;
+                border-color: #3498db;
+            }
+            .admonition.note {
+                background-color: #d4efdf;
+                border-color: #2ecc71;
+            }
+            .admonition.warning {
+                background-color: #fae5d3;
+                border-color: #e67e22;
+            }
+            .admonition.example {
+                background-color: #ebdef0;
+                border-color: #9b59b6;
+            }
+
+            .admonition.formula {
+                background-color: #d1f2eb;
+                border-color: #1abc9c;
+            }
+            .admonition.problem {
+                border: 1px solid #e74c3c;
+                border-color: #e74c3c;
+            }
+            .admonition.solution {
+                background-color: #d6eaf8;
+                border-color: #2980b9;
+            }
+            .admonition.hint {
+                background-color: #eaeded;
+                border-color: #95a5a6;
+            }
+
+            .admonition.definition {
+                background-color: #fcf3cf;
+                border-color: #f1c40f;
+            }
+            .admonition.theorem {
+                background-color: #e8daef;
+                border-color: #8e44ad;
+            }
+            .admonition.experiment {
+                background-color: #d5dbdb;
+                border-color: #34495e;
+            }
+            .admonition.concept {
+                background-color: #d5f5e3;
+                border-color: #27ae60;
+            }
+
+            .admonition.historical {
+                background-color: #f5cba7;
+                border-color: #d35400;
+            }
+            .admonition.derivation {
+                background-color: #d0ece7;
+                border-color: #16a085;
+            }
+            .admonition.proof {
+                background-color: #d5d8dc;
+                border-color: #7f8c8d;
+            }
+            .admonition.realworld {
+                background-color: #f2d7d5;
+                border-color: #c0392b;
+            }
+            .admonition.faq {
+                background-color: #d4e6f1;
+                border-color: #2c3e50;
+            }
+            .admonition.check {
+                background-color: #fdebd0;
+                border-color: #f39c12;
+            }
+
+            .solution-box {
+                border: 1px solid #2980b9;
+                background-color: #d6eaf8;
+                padding: 10px;
+                margin: 10px 0;
+                border-radius: 5px;
+            }
+
+            .solution-box summary {
+                font-weight: bold;
+                cursor: pointer;
+                padding: 5px;
+            }
+
+            pre,
+            code {
+                background-color: #eee;
+                border-radius: 3px;
+                padding: 3px 6px;
+                font-family: "Courier New", Courier, monospace;
+            }
+
+            pre {
+                padding: 10px;
+                overflow-x: auto;
+            }
+
+            img {
+                max-width: 100%;
+                height: auto;
+            }
+
+            table {
+                border-collapse: collapse;
+                width: 100%;
+            }
+
+            th,
+            td {
+                border-bottom: 1px solid #ddd;
+                padding: 8px;
+                text-align: left;
+            }
+
+            th {
+                background-color: #f2f2f2;
+            }
+
+            tr:nth-child(even) {
+                background-color: #f9f9f9;
+            }
+            tr:nth-child(odd) {
+                background-color: #ffffff;
+            }
+
+            ol[type="a"] {
+                list-style: none; /* Entferne Standard-Listensymbole */
+                counter-reset: list-counter; /* Initialisiere Zähler */
+                padding-left: 0em;
+            }
+
+            ol[type="a"] > li {
+                counter-increment: list-counter; /* Zähler erhöhen */
+                margin-bottom: 1em;
+            }
+
+            ol[type="a"] > li::before {
+                content: counter(list-counter, lower-alpha) ") "; /* a) b) c) */
+            }
+        </style>
+    </head>
+
+    <body>
+        <nav>
+             <nav class='breadcrumbs'><a href="../index.html">Physikbuch</a> > <a href="index.html">Mechanik</a></nav> 
+             <nav><ul><li><a href="index.html">Einleitung</a></li><li><a href="gewichtskraft.html">Gewichtskraft</a></li><li><a href="hebelgesetz.html">Hebelgesetz</a></li><li><a href="arbeit.html" class="active">Arbeit</a></li><li><a href="leistung.html">Leistung</a></li><li><a href="test.html">Test</a></li></ul></nav> 
+        </nav>
+
+        <header>
+            <h1>Arbeit</h1>
+            <p>Autoren:  T. Jenni </p>
+            <p> Datum: 12.3.2024 </p>
+        </header>
+
+        <main><p>Mechanische Arbeit wird verrichtet, wenn eine Kraft
+entlang eines Weges wirkt:</p>
+<p><span class="math display">\[ W = F \cdot s \]</span></p>
+<p>Dabei ist:</p>
+<ul>
+<li><span class="math inline">\(W\)</span> die Arbeit in Joule (J),</li>
+<li><span class="math inline">\(F\)</span> die Kraft in Newton (N),</li>
+<li><span class="math inline">\(s\)</span> der Weg in Metern (m).</li>
+</ul>
+<h2 id="bedingungen-für-mechanische-arbeit">Bedingungen für mechanische
+Arbeit</h2>
+<p>Arbeit wird nur dann verrichtet, wenn <strong>drei
+Bedingungen</strong> erfüllt sind:</p>
+<ol type="1">
+<li><strong>Eine Kraft wirkt auf ein Objekt.</strong></li>
+<li><strong>Das Objekt bewegt sich in Richtung der Kraft.</strong></li>
+<li><strong>Es gibt eine Verschiebung des Objekts.</strong></li>
+</ol>
+<p>Falls keine Bewegung stattfindet (z. B. eine Person hält einen
+schweren Koffer), wird <strong>keine mechanische Arbeit</strong>
+verrichtet, selbst wenn eine Kraft vorhanden ist.</p>
+<h2 id="beispiele-für-mechanische-arbeit">Beispiele für mechanische
+Arbeit</h2>
+<h3 id="beispiel-1-heben-eines-objekts"><strong>Beispiel 1: Heben eines
+Objekts</strong></h3>
+<p>Ein Kran hebt eine Last von <span
+class="math inline">\(500\,\text{N}\)</span> um <span
+class="math inline">\(2\,\text{m}\)</span> an. Die verrichtete Arbeit
+beträgt: <span class="math display">\[
+W = 500\,\text{N} \cdot 2\,\text{m} = 1000\,\text{J}
+\]</span> Das bedeutet, dass <strong>1000 Joule</strong> an Arbeit
+aufgewendet wurden, um das Objekt anzuheben.</p>
+<h3 id="beispiel-2-schieben-eines-schlitten"><strong>Beispiel 2:
+Schieben eines Schlitten</strong></h3>
+<p>Eine Person zieht einen Schlitten mit einer Kraft von <span
+class="math inline">\(150\,\text{N}\)</span> über eine Strecke von <span
+class="math inline">\(5\,\text{m}\)</span>. Falls die Kraft vollständig
+in Bewegungsrichtung wirkt: <span class="math display">\[
+W = 150\,\text{N} \cdot 5\,\text{m} = 750\,\text{J}
+\]</span> Falls die Kraft unter einem Winkel <span
+class="math inline">\(\alpha\)</span> zur Bewegung wirkt, gilt: <span
+class="math display">\[
+W = F \cdot s \cdot \cos(\alpha)
+\]</span> Hier wird nur der <strong>in Bewegungsrichtung liegende Anteil
+der Kraft</strong> berücksichtigt.</p>
+<h2 id="arbeit-gegen-eine-reibungskraft">Arbeit gegen eine
+Reibungskraft</h2>
+<p>Wenn ein Objekt über eine raue Oberfläche gezogen wird, muss
+zusätzlich die <strong>Reibungskraft</strong> überwunden werden. Falls
+eine konstante Reibungskraft <span class="math inline">\(F_R\)</span>
+auftritt, gilt: <span class="math display">\[
+W_{\text{ges}} = W_{\text{angewandt}} - W_{\text{Reibung}}
+\]</span> Wenn die Reibungskraft genau so groß ist wie die angewandte
+Kraft, bewegt sich das Objekt <strong>nicht</strong> (keine Nettokraft,
+keine Arbeit).</p>
+<h2 id="zusammenhang-zwischen-arbeit-und-energie">Zusammenhang zwischen
+Arbeit und Energie</h2>
+<p>Die verrichtete Arbeit entspricht einer Änderung der Energie. Das
+<strong>Energieerhaltungsgesetz</strong> besagt: <span
+class="math display">\[
+W = \Delta E
+\]</span> Das bedeutet, dass die mechanische Arbeit entweder:</p>
+<ul>
+<li><strong>kinetische Energie</strong> (<span class="math inline">\(E_k
+= \frac{1}{2} m v^2\)</span>)</li>
+<li><strong>potenzielle Energie</strong> (<span
+class="math inline">\(E_p = m g h\)</span>)</li>
+<li><strong>oder eine andere Energieform</strong> (z. B. Wärme)
+verändert.</li>
+</ul>
+<h2 id="aufgaben">Aufgaben</h2>
+<ol type="1">
+<li>Ein Koffer mit einer Masse von <span
+class="math inline">\(10\,\text{kg}\)</span> wird um <span
+class="math inline">\(3\,\text{m}\)</span> angehoben. Wie viel Arbeit
+wird verrichtet? <em>(Hinweis: Schwerkraft <span class="math inline">\(g
+= 9.81\,\text{m/s}^2\)</span>)</em></li>
+<li>Ein Auto der Masse <span
+class="math inline">\(1000\,\text{kg}\)</span> wird von <span
+class="math inline">\(0\)</span> auf <span
+class="math inline">\(20\,\text{m/s}\)</span> beschleunigt. Wie viel
+Arbeit wurde verrichtet?</li>
+<li>Eine Kiste wird mit einer konstanten Kraft von <span
+class="math inline">\(200\,\text{N}\)</span> über eine Strecke von <span
+class="math inline">\(8\,\text{m}\)</span> geschoben. Die Reibung
+beträgt <span class="math inline">\(50\,\text{N}\)</span>. Wie viel
+Nettoarbeit wird verrichtet?</li>
+</ol></main>
+
+        <footer>
+            <p
+                xmlns:cc="http://creativecommons.org/ns#"
+                xmlns:dct="http://purl.org/dc/terms/"
+            >
+                Diese Webseite und alle Inhalte von
+                <span property="cc:attributionName">PhyLab</span> sind
+                lizenziert unter
+                <a
+                    href="https://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1"
+                    target="_blank"
+                    rel="license noopener noreferrer"
+                    style="display: inline-block"
+                    >CC BY-NC-SA 4.0</a
+                >
+
+                <img
+                    src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"
+                    alt=""
+                />
+                <img
+                    src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"
+                    alt=""
+                />
+                <img
+                    src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"
+                    alt=""
+                />
+                <img
+                    src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"
+                    alt=""
+                />
+            </p>
+        </footer>
+    </body>
+</html>

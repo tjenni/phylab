@@ -1,0 +1,424 @@
+<!doctype html>
+<html lang="de">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Hebelgesetz</title>
+
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+        <style>
+            body {
+                font-family: "Georgia", serif;
+                line-height: 1.6;
+                max-width: 900px;
+                margin: 0 auto;
+                padding: 40px;
+                background-color: #fafafa;
+                color: #333;
+            }
+
+            a {
+                color: #333;
+            }
+
+            header {
+                margin-bottom: 30px;
+                border-bottom: 1px solid #ccc;
+            }
+
+            header ul {
+                display: inline-block;
+            }
+
+            header ul > li {
+                display: inline-block;
+                margin-right: 1em;
+            }
+
+            h1,
+            h2,
+            h3,
+            h4 {
+                color: #005288;
+            }
+
+            h1 {
+                font-size: 2.5em;
+            }
+
+            h2 {
+                font-size: 2em;
+                padding-bottom: 5px;
+                margin-top: 40px;
+            }
+
+            hr {
+                border: none;
+                border-top: 1px solid #ccc;
+                margin: 20px 0;
+            }
+
+            nav {
+                background-color: #005288;
+                padding: 0.7em;
+                border-radius: 0.4em;
+            }
+
+            nav a {
+                color: white;
+                text-decoration: none;
+            }
+
+            nav ul {
+                list-style: none;
+                padding-left: 2ex;
+                margin: 0;
+            }
+
+            nav a.active {
+                font-weight: bold;
+                color: #ff6600; /* Orange als Highlight */
+            }
+
+            nav a:hover {
+                text-decoration: underline;
+            }
+
+            nav.breadcrumbs {
+                color: white;
+                background-color: #005288;
+                padding: 0px;
+                margin: 0px;
+            }
+
+            main {
+                margin-top: 20px;
+            }
+
+            footer {
+                margin-top: 50px;
+                border-top: 1px solid #ccc;
+                font-size: 1em;
+                text-align: center;
+                padding-top: 10px;
+            }
+
+            footer img {
+                height: 22px !important;
+                margin-left: 3px;
+                vertical-align: text-bottom;
+            }
+
+            .equation {
+                text-align: center;
+                margin: 20px 0;
+                font-size: 1.2em;
+            }
+
+            .admonition {
+                padding: 10px;
+                border-left: 5px solid;
+                border-radius: 5px;
+                margin: 10px 0;
+            }
+
+            .admonition.info {
+                background-color: #d6eaf8;
+                border-color: #3498db;
+            }
+            .admonition.note {
+                background-color: #d4efdf;
+                border-color: #2ecc71;
+            }
+            .admonition.warning {
+                background-color: #fae5d3;
+                border-color: #e67e22;
+            }
+            .admonition.example {
+                background-color: #ebdef0;
+                border-color: #9b59b6;
+            }
+
+            .admonition.formula {
+                background-color: #d1f2eb;
+                border-color: #1abc9c;
+            }
+            .admonition.problem {
+                border: 1px solid #e74c3c;
+                border-color: #e74c3c;
+            }
+            .admonition.solution {
+                background-color: #d6eaf8;
+                border-color: #2980b9;
+            }
+            .admonition.hint {
+                background-color: #eaeded;
+                border-color: #95a5a6;
+            }
+
+            .admonition.definition {
+                background-color: #fcf3cf;
+                border-color: #f1c40f;
+            }
+            .admonition.theorem {
+                background-color: #e8daef;
+                border-color: #8e44ad;
+            }
+            .admonition.experiment {
+                background-color: #d5dbdb;
+                border-color: #34495e;
+            }
+            .admonition.concept {
+                background-color: #d5f5e3;
+                border-color: #27ae60;
+            }
+
+            .admonition.historical {
+                background-color: #f5cba7;
+                border-color: #d35400;
+            }
+            .admonition.derivation {
+                background-color: #d0ece7;
+                border-color: #16a085;
+            }
+            .admonition.proof {
+                background-color: #d5d8dc;
+                border-color: #7f8c8d;
+            }
+            .admonition.realworld {
+                background-color: #f2d7d5;
+                border-color: #c0392b;
+            }
+            .admonition.faq {
+                background-color: #d4e6f1;
+                border-color: #2c3e50;
+            }
+            .admonition.check {
+                background-color: #fdebd0;
+                border-color: #f39c12;
+            }
+
+            .solution-box {
+                border: 1px solid #2980b9;
+                background-color: #d6eaf8;
+                padding: 10px;
+                margin: 10px 0;
+                border-radius: 5px;
+            }
+
+            .solution-box summary {
+                font-weight: bold;
+                cursor: pointer;
+                padding: 5px;
+            }
+
+            pre,
+            code {
+                background-color: #eee;
+                border-radius: 3px;
+                padding: 3px 6px;
+                font-family: "Courier New", Courier, monospace;
+            }
+
+            pre {
+                padding: 10px;
+                overflow-x: auto;
+            }
+
+            img {
+                max-width: 100%;
+                height: auto;
+            }
+
+            table {
+                border-collapse: collapse;
+                width: 100%;
+            }
+
+            th,
+            td {
+                border-bottom: 1px solid #ddd;
+                padding: 8px;
+                text-align: left;
+            }
+
+            th {
+                background-color: #f2f2f2;
+            }
+
+            tr:nth-child(even) {
+                background-color: #f9f9f9;
+            }
+            tr:nth-child(odd) {
+                background-color: #ffffff;
+            }
+
+            ol[type="a"] {
+                list-style: none; /* Entferne Standard-Listensymbole */
+                counter-reset: list-counter; /* Initialisiere Zähler */
+                padding-left: 0em;
+            }
+
+            ol[type="a"] > li {
+                counter-increment: list-counter; /* Zähler erhöhen */
+                margin-bottom: 1em;
+            }
+
+            ol[type="a"] > li::before {
+                content: counter(list-counter, lower-alpha) ") "; /* a) b) c) */
+            }
+        </style>
+    </head>
+
+    <body>
+        <nav>
+             <nav class='breadcrumbs'><a href="../index.html">Physikbuch</a> > <a href="index.html">Mechanik</a></nav> 
+             <nav><ul><li><a href="index.html">Einleitung</a></li><li><a href="gewichtskraft.html">Gewichtskraft</a></li><li><a href="hebelgesetz.html" class="active">Hebelgesetz</a></li><li><a href="arbeit.html">Arbeit</a></li><li><a href="leistung.html">Leistung</a></li><li><a href="test.html">Test</a></li></ul></nav> 
+        </nav>
+
+        <header>
+            <h1>Hebelgesetz</h1>
+            <p>Autoren:  T. Jenni </p>
+            <p> Datum: 12.3.2024 </p>
+        </header>
+
+        <main><p>Das <strong>Hebelgesetz</strong> beschreibt das
+Gleichgewicht an einem Hebel:</p>
+<p><span class="math display">\[ F_1 \cdot l_1 = F_2 \cdot l_2
+\]</span></p>
+<p>Dabei ist: - <span class="math inline">\(F_1, F_2\)</span> die Kräfte
+in Newton (N), - <span class="math inline">\(l_1, l_2\)</span> die
+Hebelarme in Metern (m).</p>
+<p>Das bedeutet: 👉 <strong>Je länger der Hebelarm, desto weniger Kraft
+ist nötig, um das Gleichgewicht zu halten.</strong></p>
+<hr />
+<h2 id="arten-von-hebeln"><strong>Arten von Hebeln</strong></h2>
+<h3 id="einseitiger-hebel">🔹 <strong>Einseitiger Hebel</strong></h3>
+<ul>
+<li>Kraft und Last wirken <strong>auf derselben Seite</strong> des
+Drehpunkts.</li>
+<li><strong>Beispiele:</strong> Brechstange, Schubkarre, Türgriff.</li>
+</ul>
+<h3 id="zweiseitiger-hebel">🔹 <strong>Zweiseitiger Hebel</strong></h3>
+<ul>
+<li>Kraft und Last wirken <strong>auf entgegengesetzten Seiten</strong>
+des Drehpunkts.</li>
+<li><strong>Beispiele:</strong> Wippe, Schere, Nussknacker.</li>
+</ul>
+<hr />
+<h2 id="beispiele-für-das-hebelgesetz"><strong>Beispiele für das
+Hebelgesetz</strong></h2>
+<h3 id="beispiel-1-wippe"><strong>Beispiel 1: Wippe</strong></h3>
+<p>Ein Kind mit einer Masse von <strong>30 kg</strong> sitzt <strong>2 m
+vom Drehpunkt</strong> entfernt. Auf der anderen Seite sitzt ein
+<strong>schwereres Kind mit 45 kg</strong>. Wo muss es sitzen, um das
+Gleichgewicht zu halten?</p>
+<p><strong>Lösung:</strong> Zuerst berechnen wir die wirkenden Kräfte
+(mit <span class="math inline">\(g = 9.81\,\text{m/s}^2\)</span>):</p>
+<p><span class="math display">\[ F_1 = 30 \cdot 9.81 = 294.3 \text{N}
+\]</span> <span class="math display">\[ F_2 = 45 \cdot 9.81 = 441.45
+\text{N} \]</span></p>
+<p>Nun setzen wir ins Hebelgesetz ein:</p>
+<p><span class="math display">\[ 294.3 \cdot 2 = 441.45 \cdot l_2
+\]</span></p>
+<p><span class="math display">\[ l_2 = \frac{294.3 \cdot 2}{441.45} =
+1.33 \text{m} \]</span></p>
+<p>🔹 <strong>Das schwerere Kind muss 1.33 m vom Drehpunkt entfernt
+sitzen.</strong></p>
+<hr />
+<h3 id="beispiel-2-schraubenschlüssel"><strong>Beispiel 2:
+Schraubenschlüssel</strong></h3>
+<p>Ein Mechaniker benutzt einen <strong>0.5 m langen
+Schraubenschlüssel</strong>, um eine Schraube zu lösen. Er wendet eine
+<strong>Kraft von 100 N</strong> an. Wie groß ist das Drehmoment?</p>
+<p><span class="math display">\[ M = F \cdot l = 100 \cdot 0.5 = 50
+\text{Nm} \]</span></p>
+<p>🔹 <strong>Erhöht man die Länge des Schraubenschlüssels, benötigt man
+weniger Kraft.</strong></p>
+<hr />
+<h3 id="beispiel-3-brechstange"><strong>Beispiel 3:
+Brechstange</strong></h3>
+<p>Mit einer <strong>1.5 m langen Brechstange</strong> soll eine Last
+von <strong>600 N</strong> angehoben werden. Wie viel Kraft ist nötig,
+wenn der Drehpunkt <strong>0.3 m</strong> von der Last entfernt ist?</p>
+<p><strong>Lösung:</strong> Das Hebelgesetz lautet:</p>
+<p><span class="math display">\[ F_1 \cdot 1.5 = 600 \cdot 0.3
+\]</span></p>
+<p><span class="math display">\[ F_1 = \frac{600 \cdot 0.3}{1.5} = 120
+\text{N} \]</span></p>
+<p>🔹 <strong>Dank der Hebelwirkung muss nur eine Kraft von 120 N
+aufgebracht werden!</strong></p>
+<hr />
+<h2 id="drehmoment-und-hebelgesetz"><strong>Drehmoment und
+Hebelgesetz</strong></h2>
+<p>Das <strong>Drehmoment</strong> gibt an, wie stark eine Kraft um
+einen Punkt dreht:</p>
+<p><span class="math display">\[ M = F \cdot l \]</span></p>
+<p>Ein <strong>größerer Hebelarm</strong> führt zu einem <strong>höheren
+Drehmoment</strong>, wodurch weniger Kraft nötig ist.</p>
+<hr />
+<h2 id="anwendungen-des-hebelgesetzes"><strong>Anwendungen des
+Hebelgesetzes</strong></h2>
+<ul>
+<li><strong>Türgriff:</strong> Je weiter man außen drückt, desto
+leichter geht die Tür auf.</li>
+<li><strong>Fahrradpedale:</strong> Längere Kurbeln erzeugen mehr
+Drehmoment.</li>
+<li><strong>Brechstange:</strong> Vergrößert die Hebelwirkung zum Lösen
+von Nägeln.</li>
+<li><strong>Zangen &amp; Scheren:</strong> Nutzen das Prinzip des
+zweiseitigen Hebels.</li>
+</ul>
+<hr />
+<h2 id="aufgaben"><strong>Aufgaben</strong></h2>
+<ol type="1">
+<li><p>Ein Kind (40 kg) sitzt <strong>3 m vom Drehpunkt</strong> einer
+Wippe entfernt. Wo muss ein zweites Kind (50 kg) sitzen, um das
+Gleichgewicht zu halten?</p></li>
+<li><p>Ein <strong>1.2 m langer Schraubenschlüssel</strong> wird mit
+<strong>80 N</strong> belastet. Berechne das Drehmoment.</p></li>
+<li><p>Ein Erwachsener drückt mit <strong>20 N</strong> auf eine
+<strong>1.5 m lange Brechstange</strong>. Wie groß ist die maximale
+Hebelwirkung?</p></li>
+<li><p>Ein Mechaniker setzt eine <strong>0.6 m lange Ratsche</strong>
+ein. Wie viel Kraft benötigt er, um eine Schraube mit <strong>60
+Nm</strong> zu lösen?</p></li>
+</ol></main>
+
+        <footer>
+            <p
+                xmlns:cc="http://creativecommons.org/ns#"
+                xmlns:dct="http://purl.org/dc/terms/"
+            >
+                Diese Webseite und alle Inhalte von
+                <span property="cc:attributionName">PhyLab</span> sind
+                lizenziert unter
+                <a
+                    href="https://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1"
+                    target="_blank"
+                    rel="license noopener noreferrer"
+                    style="display: inline-block"
+                    >CC BY-NC-SA 4.0</a
+                >
+
+                <img
+                    src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"
+                    alt=""
+                />
+                <img
+                    src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"
+                    alt=""
+                />
+                <img
+                    src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"
+                    alt=""
+                />
+                <img
+                    src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"
+                    alt=""
+                />
+            </p>
+        </footer>
+    </body>
+</html>

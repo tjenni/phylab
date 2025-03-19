@@ -1,0 +1,520 @@
+<!doctype html>
+<html lang="de">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Gewichtskraft</title>
+
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+        <style>
+            body {
+                font-family: "Georgia", serif;
+                line-height: 1.6;
+                max-width: 900px;
+                margin: 0 auto;
+                padding: 40px;
+                background-color: #fafafa;
+                color: #333;
+            }
+
+            a {
+                color: #333;
+            }
+
+            header {
+                margin-bottom: 30px;
+                border-bottom: 1px solid #ccc;
+            }
+
+            header ul {
+                display: inline-block;
+            }
+
+            header ul > li {
+                display: inline-block;
+                margin-right: 1em;
+            }
+
+            h1,
+            h2,
+            h3,
+            h4 {
+                color: #005288;
+            }
+
+            h1 {
+                font-size: 2.5em;
+            }
+
+            h2 {
+                font-size: 2em;
+                padding-bottom: 5px;
+                margin-top: 40px;
+            }
+
+            hr {
+                border: none;
+                border-top: 1px solid #ccc;
+                margin: 20px 0;
+            }
+
+            nav {
+                background-color: #005288;
+                padding: 0.7em;
+                border-radius: 0.4em;
+            }
+
+            nav a {
+                color: white;
+                text-decoration: none;
+            }
+
+            nav ul {
+                list-style: none;
+                padding-left: 2ex;
+                margin: 0;
+            }
+
+            nav a.active {
+                font-weight: bold;
+                color: #ff6600; /* Orange als Highlight */
+            }
+
+            nav a:hover {
+                text-decoration: underline;
+            }
+
+            nav.breadcrumbs {
+                color: white;
+                background-color: #005288;
+                padding: 0px;
+                margin: 0px;
+            }
+
+            main {
+                margin-top: 20px;
+            }
+
+            footer {
+                margin-top: 50px;
+                border-top: 1px solid #ccc;
+                font-size: 1em;
+                text-align: center;
+                padding-top: 10px;
+            }
+
+            footer img {
+                height: 22px !important;
+                margin-left: 3px;
+                vertical-align: text-bottom;
+            }
+
+            .equation {
+                text-align: center;
+                margin: 20px 0;
+                font-size: 1.2em;
+            }
+
+            .admonition {
+                padding: 10px;
+                border-left: 5px solid;
+                border-radius: 5px;
+                margin: 10px 0;
+            }
+
+            .admonition.info {
+                background-color: #d6eaf8;
+                border-color: #3498db;
+            }
+            .admonition.note {
+                background-color: #d4efdf;
+                border-color: #2ecc71;
+            }
+            .admonition.warning {
+                background-color: #fae5d3;
+                border-color: #e67e22;
+            }
+            .admonition.example {
+                background-color: #ebdef0;
+                border-color: #9b59b6;
+            }
+
+            .admonition.formula {
+                background-color: #d1f2eb;
+                border-color: #1abc9c;
+            }
+            .admonition.problem {
+                border: 1px solid #e74c3c;
+                border-color: #e74c3c;
+            }
+            .admonition.solution {
+                background-color: #d6eaf8;
+                border-color: #2980b9;
+            }
+            .admonition.hint {
+                background-color: #eaeded;
+                border-color: #95a5a6;
+            }
+
+            .admonition.definition {
+                background-color: #fcf3cf;
+                border-color: #f1c40f;
+            }
+            .admonition.theorem {
+                background-color: #e8daef;
+                border-color: #8e44ad;
+            }
+            .admonition.experiment {
+                background-color: #d5dbdb;
+                border-color: #34495e;
+            }
+            .admonition.concept {
+                background-color: #d5f5e3;
+                border-color: #27ae60;
+            }
+
+            .admonition.historical {
+                background-color: #f5cba7;
+                border-color: #d35400;
+            }
+            .admonition.derivation {
+                background-color: #d0ece7;
+                border-color: #16a085;
+            }
+            .admonition.proof {
+                background-color: #d5d8dc;
+                border-color: #7f8c8d;
+            }
+            .admonition.realworld {
+                background-color: #f2d7d5;
+                border-color: #c0392b;
+            }
+            .admonition.faq {
+                background-color: #d4e6f1;
+                border-color: #2c3e50;
+            }
+            .admonition.check {
+                background-color: #fdebd0;
+                border-color: #f39c12;
+            }
+
+            .solution-box {
+                border: 1px solid #2980b9;
+                background-color: #d6eaf8;
+                padding: 10px;
+                margin: 10px 0;
+                border-radius: 5px;
+            }
+
+            .solution-box summary {
+                font-weight: bold;
+                cursor: pointer;
+                padding: 5px;
+            }
+
+            pre,
+            code {
+                background-color: #eee;
+                border-radius: 3px;
+                padding: 3px 6px;
+                font-family: "Courier New", Courier, monospace;
+            }
+
+            pre {
+                padding: 10px;
+                overflow-x: auto;
+            }
+
+            img {
+                max-width: 100%;
+                height: auto;
+            }
+
+            table {
+                border-collapse: collapse;
+                width: 100%;
+            }
+
+            th,
+            td {
+                border-bottom: 1px solid #ddd;
+                padding: 8px;
+                text-align: left;
+            }
+
+            th {
+                background-color: #f2f2f2;
+            }
+
+            tr:nth-child(even) {
+                background-color: #f9f9f9;
+            }
+            tr:nth-child(odd) {
+                background-color: #ffffff;
+            }
+
+            ol[type="a"] {
+                list-style: none; /* Entferne Standard-Listensymbole */
+                counter-reset: list-counter; /* Initialisiere Zähler */
+                padding-left: 0em;
+            }
+
+            ol[type="a"] > li {
+                counter-increment: list-counter; /* Zähler erhöhen */
+                margin-bottom: 1em;
+            }
+
+            ol[type="a"] > li::before {
+                content: counter(list-counter, lower-alpha) ") "; /* a) b) c) */
+            }
+        </style>
+    </head>
+
+    <body>
+        <nav>
+             <nav class='breadcrumbs'><a href="../index.html">Physikbuch</a> > <a href="index.html">Mechanik</a></nav> 
+             <nav><ul><li><a href="index.html">Einleitung</a></li><li><a href="gewichtskraft.html" class="active">Gewichtskraft</a></li><li><a href="hebelgesetz.html">Hebelgesetz</a></li><li><a href="arbeit.html">Arbeit</a></li><li><a href="leistung.html">Leistung</a></li><li><a href="test.html">Test</a></li></ul></nav> 
+        </nav>
+
+        <header>
+            <h1>Gewichtskraft</h1>
+            <p>Autoren:  T. Jenni </p>
+            <p> Datum: 8.3.2024 </p>
+        </header>
+
+        <main><div class="admonition formula">
+<p>Die <strong>Gewichtskraft</strong> <span
+class="math inline">\(F_G\)</span> ist die Kraft, die durch die
+Gravitation auf eine Masse wirkt. Sie beschreibt, <strong>wie stark ein
+Objekt von der Erde angezogen wird</strong>.</p>
+<p><span class="math display">\[
+F_G = m \cdot g
+\]</span></p>
+<ul>
+<li><span class="math inline">\(F_G\)</span> die Gewichtskraft in Newton
+(N),</li>
+<li><span class="math inline">\(m\)</span> die Masse in Kilogramm
+(kg),</li>
+<li><span class="math inline">\(g\)</span> die Erdbeschleunigung (ca.
+9.81 N/kg).</li>
+</ul>
+</div>
+<figure>
+<img src="assets/gewichtskraft.jpg"
+alt="Gewichtsheber (Bild: Victor Freitas / Unsplash)" />
+<figcaption aria-hidden="true">Gewichtsheber (Bild: Victor Freitas /
+Unsplash)</figcaption>
+</figure>
+<h2 id="vergleich-masse-vs.-gewichtskraft"><strong>Vergleich Masse
+vs. Gewichtskraft</strong></h2>
+<p>Die <strong>Masse (<span class="math inline">\(m\)</span>)</strong>
+ist eine <strong>physikalische Grösse</strong> und gibt an, wie viel
+Materie ein Körper enthält. Die <strong>Gewichtskraft (<span
+class="math inline">\(F_G\)</span>)</strong> ist die <strong>Kraft, mit
+der die Erde diese Masse anzieht</strong>.</p>
+<table>
+<thead>
+<tr>
+<th>Grösse</th>
+<th>Symbol</th>
+<th>Einheit</th>
+<th>Abhängig von?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Masse</td>
+<td><span class="math inline">\(m\)</span></td>
+<td>Kilogramm (kg)</td>
+<td>überall gleich</td>
+</tr>
+<tr>
+<td>Gewichtskraft</td>
+<td><span class="math inline">\(F_G\)</span></td>
+<td>Newton (N)</td>
+<td>hängt vom Ort ab</td>
+</tr>
+</tbody>
+</table>
+<p>👉 <strong>Die Masse eines Objekts ist überall gleich</strong>, aber
+die Gewichtskraft ist auf anderen Planeten anders!</p>
+<hr />
+<h2 id="beispiele-für-die-gewichtskraft"><strong>Beispiele für die
+Gewichtskraft</strong></h2>
+<h3 id="gewichtskraft-eines-menschen"><strong>Gewichtskraft eines
+Menschen</strong></h3>
+<p>Ein Mensch mit einer Masse von <strong>70 kg</strong> hat auf der
+Erde eine Gewichtskraft von:</p>
+<p><span class="math display">\[ F_G = 70 \cdot 9.81 = 686.7\,\text{N}
+\]</span></p>
+<p>Das bedeutet: <strong>Die Erde zieht diese Person mit einer Kraft von
+ca. 687 Newton an.</strong></p>
+<hr />
+<h3 id="gewichtskraft-auf-dem-mond"><strong>Gewichtskraft auf dem
+Mond</strong></h3>
+<p>Die Schwerkraft auf dem Mond beträgt nur <strong>1.62 m/s 2</strong>.
+Die gleiche Person mit <strong>70 kg</strong> hat dort:</p>
+<p><span class="math display">\[ F_G = 70 \cdot 1.62 = 113.4\,\text{N}
+\]</span></p>
+<p><strong>Der Mensch “wiegt” auf dem Mond nur ein Sechstel so viel wie
+auf der Erde.</strong></p>
+<hr />
+<h3 id="vergleich-erde---jupiter"><strong>Vergleich Erde -
+Jupiter</strong></h3>
+<table>
+<thead>
+<tr>
+<th>Planet</th>
+<th><span class="math inline">\(g\)</span> in <span
+class="math inline">\(N/kg\)</span></th>
+<th>Gewichtskraft eines 10 kg-Objekts</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Erde</strong></td>
+<td>9.81</td>
+<td><span class="math inline">\(98.1\)</span> N</td>
+</tr>
+<tr>
+<td><strong>Mond</strong></td>
+<td>1.62</td>
+<td><span class="math inline">\(16.2\)</span> N</td>
+</tr>
+<tr>
+<td><strong>Mars</strong></td>
+<td>3.71</td>
+<td><span class="math inline">\(37.1\)</span> N</td>
+</tr>
+<tr>
+<td><strong>Jupiter</strong></td>
+<td>24.79</td>
+<td><span class="math inline">\(247.9\)</span> N</td>
+</tr>
+</tbody>
+</table>
+<p>🔹 <strong>Auf Jupiter wäre man 2.5-mal schwerer als auf der
+Erde!</strong></p>
+<hr />
+<h2 id="zusammenhang-mit-der-normalkraft"><strong>Zusammenhang mit der
+Normalkraft</strong></h2>
+<p>Ein Objekt, das auf einer <strong>waagerechten Fläche</strong> liegt,
+erfährt eine <strong>Gegenkraft durch den Untergrund</strong> – die
+<strong>Normalkraft (<span
+class="math inline">\(F_N\)</span>)</strong>.</p>
+<p>Für eine <strong>waagerechte Fläche</strong> gilt:</p>
+<p><span class="math display">\[ F_N = F_G \]</span></p>
+<p>Falls sich das Objekt auf einer <strong>schiefen Ebene</strong>
+befindet, muss die Gewichtskraft in <strong>eine Komponente parallel zur
+Ebene</strong> (<span class="math inline">\(F_{\parallel}\)</span>) und
+<strong>eine senkrechte Komponente</strong> (<span
+class="math inline">\(F_{\perp}\)</span>) zerlegt werden:</p>
+<p><span class="math display">\[ F_{\parallel} = m \cdot g \cdot
+\sin(\alpha) \]</span> <span class="math display">\[ F_{\perp} = m \cdot
+g \cdot \cos(\alpha) \]</span></p>
+<p>👉 <strong>Daher rutscht ein Objekt auf einer schiefen Ebene
+herunter, wenn keine Gegenkraft wirkt!</strong></p>
+<hr />
+<h2 id="aufgaben"><strong>Aufgaben</strong></h2>
+<div class="admonition problem">
+<p><strong>Aufgabe 1</strong></p>
+<p>Berechne die Gewichtskraft eines <strong>5 kg schweren
+Rucksacks</strong> auf der Erde.</p>
+</div>
+<details class='solution-box'>
+<summary><strong>Lösung anzeigen</strong></summary>
+<p><span
+class="math display"><em>F</em><sub><em>G</em></sub> = <em>m</em> ⋅ <em>g</em> = 5 kg ⋅ 9.81 m/s<sup>2</sup> = 49.05 N</span></p>
+</details>
+<hr />
+<div class="admonition problem">
+<p><strong>Aufgabe 2</strong></p>
+<p>Wie gross wäre die Gewichtskraft des Rucksacks <strong>auf dem
+Mond</strong> (<span class="math inline">\(g =
+1.62\,\text{m/s}^2\)</span>)?</p>
+</div>
+<details class='solution-box'>
+<summary><strong>Lösung anzeigen</strong></summary>
+<p><span
+class="math display"><em>F</em><sub><em>G</em></sub> = <em>m</em> ⋅ <em>g</em> = 5 kg ⋅ 1.62 m/s<sup>2</sup> = 8.1 N</span></p>
+</details>
+<hr />
+<div class="admonition problem">
+<p><strong>Aufgabe 3</strong></p>
+<p>Ein Astronaut mit <strong>80 kg</strong> befindet sich auf
+<strong>Mars</strong> (<span class="math inline">\(g =
+3.71\,\text{m/s}^2\)</span>).</p>
+<ol type="a">
+<li>Welche Gewichtskraft hat er dort?</li>
+<li>Wie unterscheidet sich das von der Erde?</li>
+</ol>
+</div>
+<details class='solution-box'>
+<summary><strong>Lösung anzeigen</strong></summary>
+<ol type="a">
+<li><p><span
+class="math display"><em>F</em><sub><em>G</em></sub> = <em>m</em> ⋅ <em>g</em> = 80 kg ⋅ 3.71 m/s<sup>2</sup> = 296.8 N</span></p></li>
+<li><p>Die Gewichtskraft auf Mars ist kleiner als auf der Erde, da die
+Gravitationsbeschleunigung auf Mars kleiner ist als auf der
+Erde.</p></li>
+</ol>
+</details>
+<hr />
+<div class="admonition problem">
+<p><strong>Aufgabe 4</strong></p>
+<p>Eine Kiste mit <strong>15 kg</strong> liegt auf einer schiefen Ebene
+mit <strong>30° Neigung</strong>.</p>
+<ol type="a">
+<li>Berechne die <strong>senkrechte Kraft (<span
+class="math inline">\(F_{\perp}\)</span>)</strong>.</li>
+<li>Berechne die <strong>Hangabtriebskraft (<span
+class="math inline">\(F_{\parallel}\)</span>)</strong>.</li>
+</ol>
+</div>
+<details class='solution-box'>
+<summary><strong>Lösung anzeigen</strong></summary>
+<ol type="a">
+<li><p><span
+class="math display"><em>F</em><sub>⟂</sub> = <em>m</em> ⋅ <em>g</em> ⋅ cos (<em>α</em>) = 15 kg ⋅ 9.81 m/s<sup>2</sup> ⋅ cos (30°) = 127.7 N</span></p></li>
+<li><p><span
+class="math display"><em>F</em><sub>∥</sub> = <em>m</em> ⋅ <em>g</em> ⋅ sin (<em>α</em>) = 15 kg ⋅ 9.81 m/s<sup>2</sup> ⋅ sin (30°) = 73.6 N</span></p></li>
+</ol>
+</details></main>
+
+        <footer>
+            <p
+                xmlns:cc="http://creativecommons.org/ns#"
+                xmlns:dct="http://purl.org/dc/terms/"
+            >
+                Diese Webseite und alle Inhalte von
+                <span property="cc:attributionName">PhyLab</span> sind
+                lizenziert unter
+                <a
+                    href="https://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1"
+                    target="_blank"
+                    rel="license noopener noreferrer"
+                    style="display: inline-block"
+                    >CC BY-NC-SA 4.0</a
+                >
+
+                <img
+                    src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"
+                    alt=""
+                />
+                <img
+                    src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"
+                    alt=""
+                />
+                <img
+                    src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"
+                    alt=""
+                />
+                <img
+                    src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"
+                    alt=""
+                />
+            </p>
+        </footer>
+    </body>
+</html>

@@ -1,0 +1,435 @@
+<!doctype html>
+<html lang="de">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Druck</title>
+
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+        <style>
+            body {
+                font-family: "Georgia", serif;
+                line-height: 1.6;
+                max-width: 900px;
+                margin: 0 auto;
+                padding: 40px;
+                background-color: #fafafa;
+                color: #333;
+            }
+
+            a {
+                color: #333;
+            }
+
+            header {
+                margin-bottom: 30px;
+                border-bottom: 1px solid #ccc;
+            }
+
+            header ul {
+                display: inline-block;
+            }
+
+            header ul > li {
+                display: inline-block;
+                margin-right: 1em;
+            }
+
+            h1,
+            h2,
+            h3,
+            h4 {
+                color: #005288;
+            }
+
+            h1 {
+                font-size: 2.5em;
+            }
+
+            h2 {
+                font-size: 2em;
+                padding-bottom: 5px;
+                margin-top: 40px;
+            }
+
+            hr {
+                border: none;
+                border-top: 1px solid #ccc;
+                margin: 20px 0;
+            }
+
+            nav {
+                background-color: #005288;
+                padding: 0.7em;
+                border-radius: 0.4em;
+            }
+
+            nav a {
+                color: white;
+                text-decoration: none;
+            }
+
+            nav ul {
+                list-style: none;
+                padding-left: 2ex;
+                margin: 0;
+            }
+
+            nav a.active {
+                font-weight: bold;
+                color: #ff6600; /* Orange als Highlight */
+            }
+
+            nav a:hover {
+                text-decoration: underline;
+            }
+
+            nav.breadcrumbs {
+                color: white;
+                background-color: #005288;
+                padding: 0px;
+                margin: 0px;
+            }
+
+            main {
+                margin-top: 20px;
+            }
+
+            footer {
+                margin-top: 50px;
+                border-top: 1px solid #ccc;
+                font-size: 1em;
+                text-align: center;
+                padding-top: 10px;
+            }
+
+            footer img {
+                height: 22px !important;
+                margin-left: 3px;
+                vertical-align: text-bottom;
+            }
+
+            .equation {
+                text-align: center;
+                margin: 20px 0;
+                font-size: 1.2em;
+            }
+
+            .admonition {
+                padding: 10px;
+                border-left: 5px solid;
+                border-radius: 5px;
+                margin: 10px 0;
+            }
+
+            .admonition.info {
+                background-color: #d6eaf8;
+                border-color: #3498db;
+            }
+            .admonition.note {
+                background-color: #d4efdf;
+                border-color: #2ecc71;
+            }
+            .admonition.warning {
+                background-color: #fae5d3;
+                border-color: #e67e22;
+            }
+            .admonition.example {
+                background-color: #ebdef0;
+                border-color: #9b59b6;
+            }
+
+            .admonition.formula {
+                background-color: #d1f2eb;
+                border-color: #1abc9c;
+            }
+            .admonition.problem {
+                border: 1px solid #e74c3c;
+                border-color: #e74c3c;
+            }
+            .admonition.solution {
+                background-color: #d6eaf8;
+                border-color: #2980b9;
+            }
+            .admonition.hint {
+                background-color: #eaeded;
+                border-color: #95a5a6;
+            }
+
+            .admonition.definition {
+                background-color: #fcf3cf;
+                border-color: #f1c40f;
+            }
+            .admonition.theorem {
+                background-color: #e8daef;
+                border-color: #8e44ad;
+            }
+            .admonition.experiment {
+                background-color: #d5dbdb;
+                border-color: #34495e;
+            }
+            .admonition.concept {
+                background-color: #d5f5e3;
+                border-color: #27ae60;
+            }
+
+            .admonition.historical {
+                background-color: #f5cba7;
+                border-color: #d35400;
+            }
+            .admonition.derivation {
+                background-color: #d0ece7;
+                border-color: #16a085;
+            }
+            .admonition.proof {
+                background-color: #d5d8dc;
+                border-color: #7f8c8d;
+            }
+            .admonition.realworld {
+                background-color: #f2d7d5;
+                border-color: #c0392b;
+            }
+            .admonition.faq {
+                background-color: #d4e6f1;
+                border-color: #2c3e50;
+            }
+            .admonition.check {
+                background-color: #fdebd0;
+                border-color: #f39c12;
+            }
+
+            .solution-box {
+                border: 1px solid #2980b9;
+                background-color: #d6eaf8;
+                padding: 10px;
+                margin: 10px 0;
+                border-radius: 5px;
+            }
+
+            .solution-box summary {
+                font-weight: bold;
+                cursor: pointer;
+                padding: 5px;
+            }
+
+            pre,
+            code {
+                background-color: #eee;
+                border-radius: 3px;
+                padding: 3px 6px;
+                font-family: "Courier New", Courier, monospace;
+            }
+
+            pre {
+                padding: 10px;
+                overflow-x: auto;
+            }
+
+            img {
+                max-width: 100%;
+                height: auto;
+            }
+
+            table {
+                border-collapse: collapse;
+                width: 100%;
+            }
+
+            th,
+            td {
+                border-bottom: 1px solid #ddd;
+                padding: 8px;
+                text-align: left;
+            }
+
+            th {
+                background-color: #f2f2f2;
+            }
+
+            tr:nth-child(even) {
+                background-color: #f9f9f9;
+            }
+            tr:nth-child(odd) {
+                background-color: #ffffff;
+            }
+
+            ol[type="a"] {
+                list-style: none; /* Entferne Standard-Listensymbole */
+                counter-reset: list-counter; /* Initialisiere Zähler */
+                padding-left: 0em;
+            }
+
+            ol[type="a"] > li {
+                counter-increment: list-counter; /* Zähler erhöhen */
+                margin-bottom: 1em;
+            }
+
+            ol[type="a"] > li::before {
+                content: counter(list-counter, lower-alpha) ") "; /* a) b) c) */
+            }
+        </style>
+    </head>
+
+    <body>
+        <nav>
+             <nav class='breadcrumbs'><a href="../index.html">Physikbuch</a> > <a href="index.html">Wärmelehre</a></nav> 
+             <nav><ul><li><a href="index.html">Wärmelehre</a></li><li><a href="thermische_ausdehnung.html">Thermische Ausdehnung</a></li><li><a href="waerme.html">Wärme</a></li><li><a href="druck.html" class="active">Druck</a></li><li><a href="ideales_gas/index.html">Ideales Gas</a></li></ul></nav> 
+        </nav>
+
+        <header>
+            <h1>Druck</h1>
+            <p>Autoren:  T. Jenni </p>
+            <p> Datum: 8.3.2024 </p>
+        </header>
+
+        <main><h2 id="definition-des-drucks">Definition des Drucks</h2>
+<p>Der <strong>Druck</strong> ( p ) beschreibt, wie viel Kraft auf eine
+bestimmte Fläche wirkt. Er ist definiert als:</p>
+<p><span class="math display">\[ p = \frac{F}{A} \]</span></p>
+<h3 id="einheiten">Einheiten:</h3>
+<ul>
+<li>( p ) : Druck in <strong>Pascal (Pa)</strong></li>
+<li>( F ) : Kraft in <strong>Newton (N)</strong></li>
+<li>( A ) : Fläche in <strong>Quadratmetern (m²)</strong></li>
+</ul>
+<p><strong>Atmosphärischer Standarddruck:</strong> ( 1, = 100,000, )</p>
+<hr />
+<h2 id="anwendungen-des-drucks">Anwendungen des Drucks</h2>
+<p>Druck ist in vielen Bereichen der Physik und Technik von großer
+Bedeutung. Beispiele sind:</p>
+<p>🔹 <strong>Reifendruck</strong>: Der Luftdruck in Autoreifen liegt
+meist bei <strong>2 bis 3 bar</strong>. 🔹
+<strong>Flüssigkeitsdruck</strong>: Je tiefer man ins Wasser taucht,
+desto größer wird der Druck. 🔹 <strong>Berge &amp;
+Höhenkrankheit</strong>: In großen Höhen ist der Luftdruck niedriger,
+wodurch weniger Sauerstoff zur Verfügung steht.</p>
+<hr />
+<h2 id="beispiele-berechnungen">Beispiele &amp; Berechnungen</h2>
+<h3 id="beispiel-elefant-vs.-stiletto"><strong>1️⃣ Beispiel: Elefant
+vs. Stiletto</strong></h3>
+<p>Ein <strong>Elefant mit 5000 kg</strong> hat große Füße, die den
+Druck auf den Boden reduzieren. Eine <strong>Frau mit Stilettos</strong>
+hingegen übt durch die kleine Fläche einen hohen Druck aus.</p>
+<ul>
+<li>Elefantenfuß: <strong>Fläche = 0.2 m²</strong>, Gewichtskraft = ( F
+= 5000 ) N</li>
+<li>Stiletto-Absatz: <strong>Fläche = 1 cm² = 0.0001 m²</strong>,
+Gewichtskraft = ( F = 60 ) N</li>
+</ul>
+<p>Berechnung:</p>
+<ul>
+<li>Druck durch den Elefanten: <span class="math display">\[
+p = \frac{F}{A} = \frac{5000 \cdot 9.81}{4 \cdot 0.2} = 61312.5
+\,\text{Pa} = 0.6 \,\text{bar}
+\]</span></li>
+<li>Druck durch den Stiletto: <span class="math display">\[
+p = \frac{F}{A} = \frac{60 \cdot 9.81}{0.0001} = 5886000 \,\text{Pa} =
+58.86 \,\text{bar}
+\]</span></li>
+</ul>
+<p>👉 <strong>Fazit:</strong> Der Druck unter einem Stiletto ist
+<strong>fast 100-mal größer</strong> als der Druck eines Elefanten!</p>
+<hr />
+<h3 id="beispiel-taucher-in-10m-wassertiefe"><strong>2️⃣ Beispiel:
+Taucher in 10m Wassertiefe</strong></h3>
+<p>Unter Wasser nimmt der Druck mit der Tiefe zu:</p>
+<p><span class="math display">\[ p_{\text{Wasser}} = \rho \cdot g \cdot
+h \]</span></p>
+<p>Mit: - ( = 1000 ) kg/m³ (Dichte von Wasser) - ( g = 9.81 ) m/s²
+(Fallbeschleunigung) - ( h = 10 ) m (Tiefe)</p>
+<p>Berechnung:</p>
+<p><span class="math display">\[
+p_{\text{Wasser}} = 1000 \cdot 9.81 \cdot 10 = 98\,100 \,\text{Pa} =
+0.98 \,\text{bar}
+\]</span></p>
+<p>Zusammen mit dem Luftdruck beträgt der Gesamtdruck auf den
+Taucher:</p>
+<p><span class="math display">\[
+p_{\text{gesamt}} = p_{\text{Luft}} + p_{\text{Wasser}} = 1\,\text{bar}
++ 0.98\,\text{bar} = 1.98\,\text{bar}
+\]</span></p>
+<p>👉 <strong>Fazit:</strong> In 10m Tiefe hat sich der Druck fast
+verdoppelt!</p>
+<hr />
+<h2 id="zusammenhang-mit-der-höhe"><strong>Zusammenhang mit der
+Höhe</strong></h2>
+<p>Je höher man steigt, desto geringer wird der Luftdruck. Die
+Abhängigkeit ist annähernd exponentiell:</p>
+<p><span class="math display">\[
+p(h) = p_0 \cdot e^{-\frac{h}{H}}
+\]</span></p>
+<p>Mit: - ( p_0 = 101325 ) Pa (Luftdruck auf Meereshöhe) - ( H ) m
+(Skalenhöhe der Atmosphäre)</p>
+<p><strong>Beispiel: Luftdruck auf dem Mount Everest (8848 m)</strong>
+<span class="math display">\[
+p(8848) = 101325 \cdot e^{-\frac{8848}{8400}} = 33\,600 \,\text{Pa} =
+0.33 \,\text{bar}
+\]</span> 👉 <strong>Fazit:</strong> Auf dem Mount Everest beträgt der
+Luftdruck nur noch etwa <strong>ein Drittel</strong> des Werts auf
+Meereshöhe.</p>
+<hr />
+<h2 id="aufgaben-zum-thema-druck"><strong>Aufgaben zum Thema
+Druck</strong></h2>
+<ol type="1">
+<li><p>Ein Ziegelstein mit einer Masse von <strong>2.5 kg</strong> liegt
+auf einer Fläche von <strong>20 cm × 10 cm</strong>.</p>
+<ol type="a">
+<li>Wie groß ist die Gewichtskraft?</li>
+<li>Wie groß ist der Druck auf den Boden?</li>
+</ol></li>
+<li><p>Berechne den Druck auf einen Taucher in <strong>30 m
+Wassertiefe</strong>.</p></li>
+<li><p>Der Druck in einem Fahrradreifen beträgt <strong>3
+bar</strong>.</p>
+<ol type="a">
+<li>Wie hoch ist das in Pascal?</li>
+<li>Warum sollte man regelmäßig den Luftdruck im Reifen überprüfen?</li>
+</ol></li>
+<li><p>Berechne den Luftdruck in <strong>4000 m Höhe</strong>, wenn der
+Skalenwert der Atmosphäre <strong>H = 8400 m</strong> ist.</p></li>
+</ol>
+<hr />
+<p>📌 <strong>Zusammenfassung:</strong> ✅ Der Druck ist <strong>Kraft
+pro Fläche</strong> und wird in <strong>Pascal (Pa)</strong> gemessen.
+✅ Je kleiner die Fläche, desto größer der Druck. ✅ Unter Wasser steigt
+der Druck mit der Tiefe. ✅ In großen Höhen ist der Luftdruck niedriger.
+✅ <strong>Anwendungen:</strong> Reifen, Tauchen, Höhenflüge,
+Wetterphänomene.</p></main>
+
+        <footer>
+            <p
+                xmlns:cc="http://creativecommons.org/ns#"
+                xmlns:dct="http://purl.org/dc/terms/"
+            >
+                Diese Webseite und alle Inhalte von
+                <span property="cc:attributionName">PhyLab</span> sind
+                lizenziert unter
+                <a
+                    href="https://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1"
+                    target="_blank"
+                    rel="license noopener noreferrer"
+                    style="display: inline-block"
+                    >CC BY-NC-SA 4.0</a
+                >
+
+                <img
+                    src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"
+                    alt=""
+                />
+                <img
+                    src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"
+                    alt=""
+                />
+                <img
+                    src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"
+                    alt=""
+                />
+                <img
+                    src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"
+                    alt=""
+                />
+            </p>
+        </footer>
+    </body>
+</html>

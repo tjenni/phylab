@@ -1,0 +1,494 @@
+<!doctype html>
+<html lang="de">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Thermische Ausdehnung</title>
+
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+        <style>
+            body {
+                font-family: "Georgia", serif;
+                line-height: 1.6;
+                max-width: 900px;
+                margin: 0 auto;
+                padding: 40px;
+                background-color: #fafafa;
+                color: #333;
+            }
+
+            a {
+                color: #333;
+            }
+
+            header {
+                margin-bottom: 30px;
+                border-bottom: 1px solid #ccc;
+            }
+
+            header ul {
+                display: inline-block;
+            }
+
+            header ul > li {
+                display: inline-block;
+                margin-right: 1em;
+            }
+
+            h1,
+            h2,
+            h3,
+            h4 {
+                color: #005288;
+            }
+
+            h1 {
+                font-size: 2.5em;
+            }
+
+            h2 {
+                font-size: 2em;
+                padding-bottom: 5px;
+                margin-top: 40px;
+            }
+
+            hr {
+                border: none;
+                border-top: 1px solid #ccc;
+                margin: 20px 0;
+            }
+
+            nav {
+                background-color: #005288;
+                padding: 0.7em;
+                border-radius: 0.4em;
+            }
+
+            nav a {
+                color: white;
+                text-decoration: none;
+            }
+
+            nav ul {
+                list-style: none;
+                padding-left: 2ex;
+                margin: 0;
+            }
+
+            nav a.active {
+                font-weight: bold;
+                color: #ff6600; /* Orange als Highlight */
+            }
+
+            nav a:hover {
+                text-decoration: underline;
+            }
+
+            nav.breadcrumbs {
+                color: white;
+                background-color: #005288;
+                padding: 0px;
+                margin: 0px;
+            }
+
+            main {
+                margin-top: 20px;
+            }
+
+            footer {
+                margin-top: 50px;
+                border-top: 1px solid #ccc;
+                font-size: 1em;
+                text-align: center;
+                padding-top: 10px;
+            }
+
+            footer img {
+                height: 22px !important;
+                margin-left: 3px;
+                vertical-align: text-bottom;
+            }
+
+            .equation {
+                text-align: center;
+                margin: 20px 0;
+                font-size: 1.2em;
+            }
+
+            .admonition {
+                padding: 10px;
+                border-left: 5px solid;
+                border-radius: 5px;
+                margin: 10px 0;
+            }
+
+            .admonition.info {
+                background-color: #d6eaf8;
+                border-color: #3498db;
+            }
+            .admonition.note {
+                background-color: #d4efdf;
+                border-color: #2ecc71;
+            }
+            .admonition.warning {
+                background-color: #fae5d3;
+                border-color: #e67e22;
+            }
+            .admonition.example {
+                background-color: #ebdef0;
+                border-color: #9b59b6;
+            }
+
+            .admonition.formula {
+                background-color: #d1f2eb;
+                border-color: #1abc9c;
+            }
+            .admonition.problem {
+                border: 1px solid #e74c3c;
+                border-color: #e74c3c;
+            }
+            .admonition.solution {
+                background-color: #d6eaf8;
+                border-color: #2980b9;
+            }
+            .admonition.hint {
+                background-color: #eaeded;
+                border-color: #95a5a6;
+            }
+
+            .admonition.definition {
+                background-color: #fcf3cf;
+                border-color: #f1c40f;
+            }
+            .admonition.theorem {
+                background-color: #e8daef;
+                border-color: #8e44ad;
+            }
+            .admonition.experiment {
+                background-color: #d5dbdb;
+                border-color: #34495e;
+            }
+            .admonition.concept {
+                background-color: #d5f5e3;
+                border-color: #27ae60;
+            }
+
+            .admonition.historical {
+                background-color: #f5cba7;
+                border-color: #d35400;
+            }
+            .admonition.derivation {
+                background-color: #d0ece7;
+                border-color: #16a085;
+            }
+            .admonition.proof {
+                background-color: #d5d8dc;
+                border-color: #7f8c8d;
+            }
+            .admonition.realworld {
+                background-color: #f2d7d5;
+                border-color: #c0392b;
+            }
+            .admonition.faq {
+                background-color: #d4e6f1;
+                border-color: #2c3e50;
+            }
+            .admonition.check {
+                background-color: #fdebd0;
+                border-color: #f39c12;
+            }
+
+            .solution-box {
+                border: 1px solid #2980b9;
+                background-color: #d6eaf8;
+                padding: 10px;
+                margin: 10px 0;
+                border-radius: 5px;
+            }
+
+            .solution-box summary {
+                font-weight: bold;
+                cursor: pointer;
+                padding: 5px;
+            }
+
+            pre,
+            code {
+                background-color: #eee;
+                border-radius: 3px;
+                padding: 3px 6px;
+                font-family: "Courier New", Courier, monospace;
+            }
+
+            pre {
+                padding: 10px;
+                overflow-x: auto;
+            }
+
+            img {
+                max-width: 100%;
+                height: auto;
+            }
+
+            table {
+                border-collapse: collapse;
+                width: 100%;
+            }
+
+            th,
+            td {
+                border-bottom: 1px solid #ddd;
+                padding: 8px;
+                text-align: left;
+            }
+
+            th {
+                background-color: #f2f2f2;
+            }
+
+            tr:nth-child(even) {
+                background-color: #f9f9f9;
+            }
+            tr:nth-child(odd) {
+                background-color: #ffffff;
+            }
+
+            ol[type="a"] {
+                list-style: none; /* Entferne Standard-Listensymbole */
+                counter-reset: list-counter; /* Initialisiere Zähler */
+                padding-left: 0em;
+            }
+
+            ol[type="a"] > li {
+                counter-increment: list-counter; /* Zähler erhöhen */
+                margin-bottom: 1em;
+            }
+
+            ol[type="a"] > li::before {
+                content: counter(list-counter, lower-alpha) ") "; /* a) b) c) */
+            }
+        </style>
+    </head>
+
+    <body>
+        <nav>
+             <nav class='breadcrumbs'><a href="../index.html">Physikbuch</a> > <a href="index.html">Wärmelehre</a></nav> 
+             <nav><ul><li><a href="index.html">Wärmelehre</a></li><li><a href="thermische_ausdehnung.html" class="active">Thermische Ausdehnung</a></li><li><a href="waerme.html">Wärme</a></li><li><a href="druck.html">Druck</a></li><li><a href="ideales_gas/index.html">Ideales Gas</a></li></ul></nav> 
+        </nav>
+
+        <header>
+            <h1>Thermische Ausdehnung</h1>
+            <p>Autoren:  T. Jenni </p>
+            <p> Datum: 8.3.2024 </p>
+        </header>
+
+        <main><h2 id="was-ist-die-thermische-ausdehnung"><strong>Was ist
+die thermische Ausdehnung?</strong></h2>
+<p>Stoffe dehnen sich bei <strong>Erwärmung</strong> aus und ziehen sich
+bei <strong>Abkühlung</strong> zusammen. Dies geschieht, weil sich die
+<strong>Teilchenbewegung</strong> verstärkt und die Abstände zwischen
+den Teilchen größer werden.</p>
+<p>Die <strong>Längenausdehnung</strong> eines festen Körpers wird
+beschrieben durch:</p>
+<p><span class="math display">\[ \Delta l = l_0 \cdot \alpha \cdot
+\Delta T \]</span></p>
+<ul>
+<li><strong>( l )</strong> : Längenänderung (m)</li>
+<li><strong>( l_0 )</strong> : ursprüngliche Länge (m)</li>
+<li><strong>( )</strong> : Längenausdehnungskoeffizient (1/K)</li>
+<li><strong>( T )</strong> : Temperaturänderung (K oder °C)</li>
+</ul>
+<hr />
+<h2 id="thermische-volumenausdehnung"><strong>Thermische
+Volumenausdehnung</strong></h2>
+<p>Neben der Längenänderung gibt es auch eine
+<strong>Volumenausdehnung</strong>, die für Flüssigkeiten und Gase
+besonders relevant ist:</p>
+<p><span class="math display">\[ \Delta V = V_0 \cdot \beta \cdot \Delta
+T \]</span></p>
+<ul>
+<li><strong>( V )</strong> : Volumenänderung (m³)</li>
+<li><strong>( V_0 )</strong> : Anfangsvolumen (m³)</li>
+<li><strong>( )</strong> : Volumenausdehnungskoeffizient (1/K)</li>
+<li><strong>( T )</strong> : Temperaturänderung (K oder °C)</li>
+</ul>
+<p>Da sich Körper in alle Richtungen ausdehnen, gilt für Feststoffe: (
+), also ist der <strong>Volumenausdehnungskoeffizient etwa das Dreifache
+des Längenausdehnungskoeffizienten</strong>.</p>
+<hr />
+<h2
+id="typische-werte-des-längenausdehnungskoeffizienten"><strong>Typische
+Werte des Längenausdehnungskoeffizienten</strong></h2>
+<table>
+<thead>
+<tr>
+<th>Material</th>
+<th>Längenausdehnungskoeffizient ( ) (1/K)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Aluminium</td>
+<td>( 23 ^{-6} )</td>
+</tr>
+<tr>
+<td>Eisen</td>
+<td>( 12 ^{-6} )</td>
+</tr>
+<tr>
+<td>Glas</td>
+<td>( 8 ^{-6} )</td>
+</tr>
+<tr>
+<td>Kupfer</td>
+<td>( 17 ^{-6} )</td>
+</tr>
+<tr>
+<td>Beton</td>
+<td>( 10 ^{-6} )</td>
+</tr>
+</tbody>
+</table>
+<p>👉 <strong>Metalle dehnen sich stärker aus als Glas oder
+Beton.</strong></p>
+<hr />
+<h2 id="beispiele-berechnungen"><strong>Beispiele &amp;
+Berechnungen</strong></h2>
+<h3 id="beispiel-eisenbahnschienen"><strong>1️⃣ Beispiel:
+Eisenbahnschienen</strong></h3>
+<p>Eine <strong>Eisenbahnschiene aus Stahl (Eisen) mit 20 m
+Länge</strong> wird im Sommer von <strong>10°C auf 40°C</strong>
+erwärmt.</p>
+<p>Berechnung der Längenänderung:</p>
+<p><span class="math display">\[
+\Delta l = l_0 \cdot \alpha \cdot \Delta T
+\]</span> <span class="math display">\[
+\Delta l = 20 \cdot 12 \cdot 10^{-6} \cdot (40 - 10)
+\]</span> <span class="math display">\[
+\Delta l = 20 \cdot 12 \cdot 10^{-6} \cdot 30
+\]</span> <span class="math display">\[
+\Delta l = 7.2 \,\text{mm}
+\]</span></p>
+<p>👉 <strong>Fazit:</strong> Die Schiene dehnt sich um <strong>7.2
+mm</strong> aus. Deshalb gibt es <strong>Dehnungsfugen</strong> in
+Gleisen, damit sich das Material ausdehnen kann, ohne sich zu
+verformen.</p>
+<hr />
+<h3 id="beispiel-brückenausdehnung"><strong>2️⃣ Beispiel:
+Brückenausdehnung</strong></h3>
+<p>Eine <strong>Brücke aus Beton mit 100 m Länge</strong> erfährt im
+Jahresverlauf eine Temperaturänderung von <strong>-10°C bis
++30°C</strong>.</p>
+<p><span class="math display">\[
+\Delta l = l_0 \cdot \alpha \cdot \Delta T
+\]</span> <span class="math display">\[
+\Delta l = 100 \cdot 10 \cdot 10^{-6} \cdot (30 - (-10))
+\]</span> <span class="math display">\[
+\Delta l = 100 \cdot 10 \cdot 10^{-6} \cdot 40
+\]</span> <span class="math display">\[
+\Delta l = 40 \,\text{mm}
+\]</span></p>
+<p>👉 <strong>Fazit:</strong> Die Brücke verlängert sich um <strong>4
+cm</strong>, weshalb sie mit <strong>Gleitlagern</strong> gebaut
+wird.</p>
+<hr />
+<h2 id="spezialfall-wasser"><strong>Spezialfall: Wasser</strong></h2>
+<p>Wasser verhält sich <strong>anders als die meisten Stoffe</strong>: -
+Es hat bei <strong>4°C</strong> die <strong>höchste Dichte</strong>. -
+Beim <strong>Gefrieren (0°C)</strong> <strong>dehnt sich Wasser
+aus</strong>, anstatt sich zusammenzuziehen. - Dies führt dazu, dass
+<strong>Eis auf Wasser schwimmt</strong>, da es eine geringere Dichte
+hat.</p>
+<p><strong>Anwendung:</strong> Im Winter können <strong>Wasserleitungen
+platzen</strong>, wenn das Wasser in ihnen gefriert und sich
+ausdehnt.</p>
+<hr />
+<h2 id="anwendungen-der-thermischen-ausdehnung"><strong>Anwendungen der
+thermischen Ausdehnung</strong></h2>
+<p>🔹 <strong>Bimetallstreifen</strong>: Thermostate nutzen
+unterschiedliche Ausdehnungskoeffizienten zweier Metalle zur
+Temperaturmessung. 🔹 <strong>Stromleitungen</strong>: Sie hängen im
+Sommer lockerer als im Winter, weil sie sich bei Hitze ausdehnen. 🔹
+<strong>Brückenlager &amp; Eisenbahnschienen</strong>: Dehnungsfugen
+ermöglichen Ausdehnung ohne Schäden. 🔹 <strong>Quecksilber- und
+Alkoholthermometer</strong>: Nutzen die Volumenausdehnung von
+Flüssigkeiten zur Temperaturmessung.</p>
+<hr />
+<h2 id="aufgaben-zur-thermischen-ausdehnung"><strong>Aufgaben zur
+thermischen Ausdehnung</strong></h2>
+<ol type="1">
+<li>Ein Aluminiumstab hat bei ( 20^C ) eine Länge von <strong>2
+m</strong>.
+<ol type="a">
+<li>Wie lang ist er bei ( 80^C )?</li>
+<li>Um wie viele mm hat er sich ausgedehnt? (Hinweis: ( _{} = 23 ^{-6} )
+1/K)</li>
+</ol></li>
+<li>Ein <strong>Stahlseil (10 m Länge)</strong> wird im Winter auf
+<strong>-15°C</strong> gekühlt.
+<ol type="a">
+<li>Wie lang ist es im Sommer bei <strong>35°C</strong>?</li>
+<li>Warum sind solche Effekte in Seilbrücken wichtig?</li>
+</ol></li>
+<li>Wasser dehnt sich beim Gefrieren aus.
+<ol type="a">
+<li>Warum kann das <strong>Pflastersteine im Winter
+beschädigen</strong>?</li>
+<li>Warum schützt <strong>Streusalz</strong> die Straßen?</li>
+</ol></li>
+<li>Ein <strong>Eisenrohr mit 5 m Länge</strong> wird um <strong>1 cm
+länger</strong>.
+<ol type="a">
+<li>Wie stark hat sich die Temperatur geändert? (Hinweis: ( _{} = 12
+^{-6} ) 1/K)</li>
+</ol></li>
+</ol>
+<hr />
+<p>📌 <strong>Zusammenfassung:</strong></p>
+<ul>
+<li><strong>Feststoffe dehnen sich bei Erwärmung aus.</strong></li>
+<li><strong>Die Längenänderung ist proportional zur
+Temperaturdifferenz.</strong></li>
+<li><strong>Brücken, Schienen und Stromleitungen benötigen
+Dehnungsfugen.</strong></li>
+<li><strong>Wasser verhält sich besonders, weil es sich beim Gefrieren
+ausdehnt.</strong></li>
+</ul></main>
+
+        <footer>
+            <p
+                xmlns:cc="http://creativecommons.org/ns#"
+                xmlns:dct="http://purl.org/dc/terms/"
+            >
+                Diese Webseite und alle Inhalte von
+                <span property="cc:attributionName">PhyLab</span> sind
+                lizenziert unter
+                <a
+                    href="https://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1"
+                    target="_blank"
+                    rel="license noopener noreferrer"
+                    style="display: inline-block"
+                    >CC BY-NC-SA 4.0</a
+                >
+
+                <img
+                    src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"
+                    alt=""
+                />
+                <img
+                    src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"
+                    alt=""
+                />
+                <img
+                    src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"
+                    alt=""
+                />
+                <img
+                    src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"
+                    alt=""
+                />
+            </p>
+        </footer>
+    </body>
+</html>

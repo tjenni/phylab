@@ -1,0 +1,386 @@
+<!doctype html>
+<html lang="de">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Mechanik</title>
+
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+        <style>
+            body {
+                font-family: "Georgia", serif;
+                line-height: 1.6;
+                max-width: 900px;
+                margin: 0 auto;
+                padding: 40px;
+                background-color: #fafafa;
+                color: #333;
+            }
+
+            a {
+                color: #333;
+            }
+
+            header {
+                margin-bottom: 30px;
+                border-bottom: 1px solid #ccc;
+            }
+
+            header ul {
+                display: inline-block;
+            }
+
+            header ul > li {
+                display: inline-block;
+                margin-right: 1em;
+            }
+
+            h1,
+            h2,
+            h3,
+            h4 {
+                color: #005288;
+            }
+
+            h1 {
+                font-size: 2.5em;
+            }
+
+            h2 {
+                font-size: 2em;
+                padding-bottom: 5px;
+                margin-top: 40px;
+            }
+
+            hr {
+                border: none;
+                border-top: 1px solid #ccc;
+                margin: 20px 0;
+            }
+
+            nav {
+                background-color: #005288;
+                padding: 0.7em;
+                border-radius: 0.4em;
+            }
+
+            nav a {
+                color: white;
+                text-decoration: none;
+            }
+
+            nav ul {
+                list-style: none;
+                padding-left: 2ex;
+                margin: 0;
+            }
+
+            nav a.active {
+                font-weight: bold;
+                color: #ff6600; /* Orange als Highlight */
+            }
+
+            nav a:hover {
+                text-decoration: underline;
+            }
+
+            nav.breadcrumbs {
+                color: white;
+                background-color: #005288;
+                padding: 0px;
+                margin: 0px;
+            }
+
+            main {
+                margin-top: 20px;
+            }
+
+            footer {
+                margin-top: 50px;
+                border-top: 1px solid #ccc;
+                font-size: 1em;
+                text-align: center;
+                padding-top: 10px;
+            }
+
+            footer img {
+                height: 22px !important;
+                margin-left: 3px;
+                vertical-align: text-bottom;
+            }
+
+            .equation {
+                text-align: center;
+                margin: 20px 0;
+                font-size: 1.2em;
+            }
+
+            .admonition {
+                padding: 10px;
+                border-left: 5px solid;
+                border-radius: 5px;
+                margin: 10px 0;
+            }
+
+            .admonition.info {
+                background-color: #d6eaf8;
+                border-color: #3498db;
+            }
+            .admonition.note {
+                background-color: #d4efdf;
+                border-color: #2ecc71;
+            }
+            .admonition.warning {
+                background-color: #fae5d3;
+                border-color: #e67e22;
+            }
+            .admonition.example {
+                background-color: #ebdef0;
+                border-color: #9b59b6;
+            }
+
+            .admonition.formula {
+                background-color: #d1f2eb;
+                border-color: #1abc9c;
+            }
+            .admonition.problem {
+                border: 1px solid #e74c3c;
+                border-color: #e74c3c;
+            }
+            .admonition.solution {
+                background-color: #d6eaf8;
+                border-color: #2980b9;
+            }
+            .admonition.hint {
+                background-color: #eaeded;
+                border-color: #95a5a6;
+            }
+
+            .admonition.definition {
+                background-color: #fcf3cf;
+                border-color: #f1c40f;
+            }
+            .admonition.theorem {
+                background-color: #e8daef;
+                border-color: #8e44ad;
+            }
+            .admonition.experiment {
+                background-color: #d5dbdb;
+                border-color: #34495e;
+            }
+            .admonition.concept {
+                background-color: #d5f5e3;
+                border-color: #27ae60;
+            }
+
+            .admonition.historical {
+                background-color: #f5cba7;
+                border-color: #d35400;
+            }
+            .admonition.derivation {
+                background-color: #d0ece7;
+                border-color: #16a085;
+            }
+            .admonition.proof {
+                background-color: #d5d8dc;
+                border-color: #7f8c8d;
+            }
+            .admonition.realworld {
+                background-color: #f2d7d5;
+                border-color: #c0392b;
+            }
+            .admonition.faq {
+                background-color: #d4e6f1;
+                border-color: #2c3e50;
+            }
+            .admonition.check {
+                background-color: #fdebd0;
+                border-color: #f39c12;
+            }
+
+            .solution-box {
+                border: 1px solid #2980b9;
+                background-color: #d6eaf8;
+                padding: 10px;
+                margin: 10px 0;
+                border-radius: 5px;
+            }
+
+            .solution-box summary {
+                font-weight: bold;
+                cursor: pointer;
+                padding: 5px;
+            }
+
+            pre,
+            code {
+                background-color: #eee;
+                border-radius: 3px;
+                padding: 3px 6px;
+                font-family: "Courier New", Courier, monospace;
+            }
+
+            pre {
+                padding: 10px;
+                overflow-x: auto;
+            }
+
+            img {
+                max-width: 100%;
+                height: auto;
+            }
+
+            table {
+                border-collapse: collapse;
+                width: 100%;
+            }
+
+            th,
+            td {
+                border-bottom: 1px solid #ddd;
+                padding: 8px;
+                text-align: left;
+            }
+
+            th {
+                background-color: #f2f2f2;
+            }
+
+            tr:nth-child(even) {
+                background-color: #f9f9f9;
+            }
+            tr:nth-child(odd) {
+                background-color: #ffffff;
+            }
+
+            ol[type="a"] {
+                list-style: none; /* Entferne Standard-Listensymbole */
+                counter-reset: list-counter; /* Initialisiere Zähler */
+                padding-left: 0em;
+            }
+
+            ol[type="a"] > li {
+                counter-increment: list-counter; /* Zähler erhöhen */
+                margin-bottom: 1em;
+            }
+
+            ol[type="a"] > li::before {
+                content: counter(list-counter, lower-alpha) ") "; /* a) b) c) */
+            }
+        </style>
+    </head>
+
+    <body>
+        <nav>
+             <nav class='breadcrumbs'><a href="../index.html">Physikbuch</a> > <a href="index.html">Mechanik</a></nav> 
+             <nav><ul><li><a href="index.html" class="active">Einleitung</a></li><li><a href="gewichtskraft.html">Gewichtskraft</a></li><li><a href="hebelgesetz.html">Hebelgesetz</a></li><li><a href="arbeit.html">Arbeit</a></li><li><a href="leistung.html">Leistung</a></li><li><a href="test.html">Test</a></li></ul></nav> 
+        </nav>
+
+        <header>
+            <h1>Mechanik</h1>
+            <p>Autoren:  T. Jenni </p>
+            <p> Datum: 8.3.2024 </p>
+        </header>
+
+        <main><p>Willkommen im Kapitel <em>Mechanik</em>! Die Mechanik
+ist ein grundlegendes Teilgebiet der Physik, das sich mit der Bewegung
+von Körpern und den darauf wirkenden Kräften beschäftigt.</p>
+<hr />
+<h2 id="was-ist-mechanik">Was ist Mechanik?</h2>
+<p>Die Mechanik untersucht, wie sich Objekte unter dem Einfluss von
+Kräften bewegen oder in Ruhe bleiben. Sie beantwortet Fragen wie:</p>
+<ul>
+<li>Warum fällt ein Apfel zu Boden? 🍏</li>
+<li>Wie funktioniert eine Wippe oder eine Schubkarre? ⚖️</li>
+<li>Wieso braucht man mehr Kraft, um einen schweren Stein anzuheben als
+einen leichten? 🏋️</li>
+</ul>
+<p>Die Prinzipien der Mechanik lassen sich überall im Alltag beobachten
+– von der Bewegung von Autos bis hin zur Gravitation, die Planeten in
+ihrer Umlaufbahn hält.</p>
+<hr />
+<h2 id="unterkapitel-in-der-mechanik">Unterkapitel in der Mechanik</h2>
+<p>In diesem Kapitel findest du verschiedene Themen rund um die
+Mechanik:</p>
+<h3 id="gewichtskraft">🔹 Gewichtskraft</h3>
+<p>Jedes Objekt wird von der Erde angezogen. Die
+<strong>Gewichtskraft</strong> bestimmt, wie stark ein Körper durch die
+Gravitation beeinflusst wird.</p>
+<h3 id="hebelgesetz">🔹 Hebelgesetz</h3>
+<p>Wie funktioniert eine Wippe? Warum erleichtert ein langer
+Schraubenschlüssel das Öffnen einer festsitzenden Schraube? Das
+<strong>Hebelgesetz</strong> beschreibt das Gleichgewicht an einem
+Hebel.</p>
+<h3 id="arbeit-und-leistung">🔹 Arbeit und Leistung</h3>
+<ul>
+<li><strong>Arbeit</strong> beschreibt, wie viel Energie übertragen
+wird, wenn eine Kraft auf ein Objekt wirkt.</li>
+<li><strong>Leistung</strong> gibt an, wie schnell diese Arbeit
+verrichtet wird – ob beim Treppensteigen oder beim Motor eines
+Autos.</li>
+</ul>
+<hr />
+<h2 id="bedeutung-der-mechanik"><strong>Bedeutung der
+Mechanik</strong></h2>
+<p>Mechanik ist eine der ältesten Disziplinen der Physik. Ihre
+Prinzipien wurden von <strong>Aristoteles</strong> und <strong>Galileo
+Galilei</strong> erforscht, doch erst <strong>Isaac Newton</strong>
+formulierte sie als universelle Gesetze. Heute wird die Mechanik in
+vielen Bereichen angewendet:</p>
+<ul>
+<li><strong>Maschinenbau</strong> (z. B. Hebel und Zahnräder)</li>
+<li><strong>Architektur</strong> (z. B. Stabilität von Gebäuden)</li>
+<li><strong>Raumfahrt</strong> (z. B. Bewegung von Satelliten)</li>
+<li><strong>Sport</strong> (z. B. Kräfte beim Laufen oder Springen)</li>
+</ul>
+<p>Die Mechanik ist also überall um uns herum! 🚀</p>
+<hr />
+<h2 id="zum-weiterdenken"><strong>Zum Weiterdenken</strong></h2>
+<p>Hast du schon einmal darüber nachgedacht,</p>
+<ul>
+<li>👉 warum man beim Fahrradfahren schneller wird, wenn man bergab
+fährt 🚴‍♂️</li>
+<li>👉 warum es einfacher ist, einen grossen Stein mit einem Hebel zu
+bewegen als mit blossen Händen?</li>
+</ul>
+<p>🔹 In den nächsten Kapiteln erfährst du die Antworten!</p>
+<p>Lass uns gemeinsam die faszinierende Welt der Mechanik entdecken!
+🎯✨</p></main>
+
+        <footer>
+            <p
+                xmlns:cc="http://creativecommons.org/ns#"
+                xmlns:dct="http://purl.org/dc/terms/"
+            >
+                Diese Webseite und alle Inhalte von
+                <span property="cc:attributionName">PhyLab</span> sind
+                lizenziert unter
+                <a
+                    href="https://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1"
+                    target="_blank"
+                    rel="license noopener noreferrer"
+                    style="display: inline-block"
+                    >CC BY-NC-SA 4.0</a
+                >
+
+                <img
+                    src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"
+                    alt=""
+                />
+                <img
+                    src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"
+                    alt=""
+                />
+                <img
+                    src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"
+                    alt=""
+                />
+                <img
+                    src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"
+                    alt=""
+                />
+            </p>
+        </footer>
+    </body>
+</html>

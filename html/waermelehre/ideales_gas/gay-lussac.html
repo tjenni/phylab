@@ -1,0 +1,467 @@
+<!doctype html>
+<html lang="de">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Gesetz von Gay-Lussac</title>
+
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+        <style>
+            body {
+                font-family: "Georgia", serif;
+                line-height: 1.6;
+                max-width: 900px;
+                margin: 0 auto;
+                padding: 40px;
+                background-color: #fafafa;
+                color: #333;
+            }
+
+            a {
+                color: #333;
+            }
+
+            header {
+                margin-bottom: 30px;
+                border-bottom: 1px solid #ccc;
+            }
+
+            header ul {
+                display: inline-block;
+            }
+
+            header ul > li {
+                display: inline-block;
+                margin-right: 1em;
+            }
+
+            h1,
+            h2,
+            h3,
+            h4 {
+                color: #005288;
+            }
+
+            h1 {
+                font-size: 2.5em;
+            }
+
+            h2 {
+                font-size: 2em;
+                padding-bottom: 5px;
+                margin-top: 40px;
+            }
+
+            hr {
+                border: none;
+                border-top: 1px solid #ccc;
+                margin: 20px 0;
+            }
+
+            nav {
+                background-color: #005288;
+                padding: 0.7em;
+                border-radius: 0.4em;
+            }
+
+            nav a {
+                color: white;
+                text-decoration: none;
+            }
+
+            nav ul {
+                list-style: none;
+                padding-left: 2ex;
+                margin: 0;
+            }
+
+            nav a.active {
+                font-weight: bold;
+                color: #ff6600; /* Orange als Highlight */
+            }
+
+            nav a:hover {
+                text-decoration: underline;
+            }
+
+            nav.breadcrumbs {
+                color: white;
+                background-color: #005288;
+                padding: 0px;
+                margin: 0px;
+            }
+
+            main {
+                margin-top: 20px;
+            }
+
+            footer {
+                margin-top: 50px;
+                border-top: 1px solid #ccc;
+                font-size: 1em;
+                text-align: center;
+                padding-top: 10px;
+            }
+
+            footer img {
+                height: 22px !important;
+                margin-left: 3px;
+                vertical-align: text-bottom;
+            }
+
+            .equation {
+                text-align: center;
+                margin: 20px 0;
+                font-size: 1.2em;
+            }
+
+            .admonition {
+                padding: 10px;
+                border-left: 5px solid;
+                border-radius: 5px;
+                margin: 10px 0;
+            }
+
+            .admonition.info {
+                background-color: #d6eaf8;
+                border-color: #3498db;
+            }
+            .admonition.note {
+                background-color: #d4efdf;
+                border-color: #2ecc71;
+            }
+            .admonition.warning {
+                background-color: #fae5d3;
+                border-color: #e67e22;
+            }
+            .admonition.example {
+                background-color: #ebdef0;
+                border-color: #9b59b6;
+            }
+
+            .admonition.formula {
+                background-color: #d1f2eb;
+                border-color: #1abc9c;
+            }
+            .admonition.problem {
+                border: 1px solid #e74c3c;
+                border-color: #e74c3c;
+            }
+            .admonition.solution {
+                background-color: #d6eaf8;
+                border-color: #2980b9;
+            }
+            .admonition.hint {
+                background-color: #eaeded;
+                border-color: #95a5a6;
+            }
+
+            .admonition.definition {
+                background-color: #fcf3cf;
+                border-color: #f1c40f;
+            }
+            .admonition.theorem {
+                background-color: #e8daef;
+                border-color: #8e44ad;
+            }
+            .admonition.experiment {
+                background-color: #d5dbdb;
+                border-color: #34495e;
+            }
+            .admonition.concept {
+                background-color: #d5f5e3;
+                border-color: #27ae60;
+            }
+
+            .admonition.historical {
+                background-color: #f5cba7;
+                border-color: #d35400;
+            }
+            .admonition.derivation {
+                background-color: #d0ece7;
+                border-color: #16a085;
+            }
+            .admonition.proof {
+                background-color: #d5d8dc;
+                border-color: #7f8c8d;
+            }
+            .admonition.realworld {
+                background-color: #f2d7d5;
+                border-color: #c0392b;
+            }
+            .admonition.faq {
+                background-color: #d4e6f1;
+                border-color: #2c3e50;
+            }
+            .admonition.check {
+                background-color: #fdebd0;
+                border-color: #f39c12;
+            }
+
+            .solution-box {
+                border: 1px solid #2980b9;
+                background-color: #d6eaf8;
+                padding: 10px;
+                margin: 10px 0;
+                border-radius: 5px;
+            }
+
+            .solution-box summary {
+                font-weight: bold;
+                cursor: pointer;
+                padding: 5px;
+            }
+
+            pre,
+            code {
+                background-color: #eee;
+                border-radius: 3px;
+                padding: 3px 6px;
+                font-family: "Courier New", Courier, monospace;
+            }
+
+            pre {
+                padding: 10px;
+                overflow-x: auto;
+            }
+
+            img {
+                max-width: 100%;
+                height: auto;
+            }
+
+            table {
+                border-collapse: collapse;
+                width: 100%;
+            }
+
+            th,
+            td {
+                border-bottom: 1px solid #ddd;
+                padding: 8px;
+                text-align: left;
+            }
+
+            th {
+                background-color: #f2f2f2;
+            }
+
+            tr:nth-child(even) {
+                background-color: #f9f9f9;
+            }
+            tr:nth-child(odd) {
+                background-color: #ffffff;
+            }
+
+            ol[type="a"] {
+                list-style: none; /* Entferne Standard-Listensymbole */
+                counter-reset: list-counter; /* Initialisiere Zähler */
+                padding-left: 0em;
+            }
+
+            ol[type="a"] > li {
+                counter-increment: list-counter; /* Zähler erhöhen */
+                margin-bottom: 1em;
+            }
+
+            ol[type="a"] > li::before {
+                content: counter(list-counter, lower-alpha) ") "; /* a) b) c) */
+            }
+        </style>
+    </head>
+
+    <body>
+        <nav>
+             <nav class='breadcrumbs'><a href="../../index.html">Physikbuch</a> > <a href="../index.html">Wärmelehre</a> > <a href="index.html">Ideales Gas</a></nav> 
+             <nav><ul><li><a href="index.html">Ideales Gas</a></li><li><a href="boyle-marriote.html">Boyle-Mariotte-Gesetz</a></li><li><a href="gay-lussac.html" class="active">Gesetz von Gay-Lussac</a></li><li><a href="allgemeine_gasgleichung.html">Allgemeine Gasgleichung</a></li></ul></nav> 
+        </nav>
+
+        <header>
+            <h1>Gesetz von Gay-Lussac</h1>
+            <p>Autoren:  T. Jenni </p>
+            <p> Datum: 8.3.2024 </p>
+        </header>
+
+        <main><h2 id="das-gesetz-von-gay-lussac"><strong>Das Gesetz von
+Gay-Lussac</strong> 🔥📏</h2>
+<p>Das <strong>Gesetz von Gay-Lussac</strong> beschreibt den
+Zusammenhang zwischen <strong>Temperatur</strong> und
+<strong>Volumen</strong> eines Gases bei <strong>konstantem
+Druck</strong>.</p>
+<h3 id="formel"><strong>Formel:</strong></h3>
+<p><span class="math display">\[
+\frac{V_1}{T_1} = \frac{V_2}{T_2}
+\]</span></p>
+<h3 id="bedeutung-der-variablen"><strong>Bedeutung der
+Variablen:</strong></h3>
+<ul>
+<li><strong>( V )</strong> = Volumen (m³ oder Liter)</li>
+<li><strong>( T )</strong> = Temperatur (Kelvin, K)</li>
+</ul>
+<p>📌 <strong>Wichtig:</strong> Die Temperatur muss immer in
+<strong>Kelvin</strong> angegeben werden! 👉 <strong>0°C = 273.15
+K</strong>, also gilt: <span class="math display">\[
+T(K) = T(°C) + 273.15
+\]</span></p>
+<p>🔹 <strong>Gesetzmäßigkeit:</strong> - <strong>Wenn die Temperatur
+steigt, dehnt sich das Gas aus.</strong> - <strong>Wenn die Temperatur
+sinkt, schrumpft das Gas.</strong></p>
+<p>👉 <strong>Das Verhältnis ( V/T ) bleibt konstant, solange der Druck
+gleich bleibt.</strong></p>
+<hr />
+<h2 id="mathematische-darstellung"><strong>Mathematische
+Darstellung</strong> ✍️</h2>
+<p>Vergleicht man zwei verschiedene Zustände eines Gases:</p>
+<p><span class="math display">\[
+\frac{V_1}{T_1} = \frac{V_2}{T_2}
+\]</span></p>
+<ul>
+<li><strong>( V_1, T_1 )</strong> = Volumen und Temperatur im ersten
+Zustand</li>
+<li><strong>( V_2, T_2 )</strong> = Volumen und Temperatur im zweiten
+Zustand</li>
+</ul>
+<p>Das bedeutet: - <strong>Wenn die Temperatur steigt, vergrößert sich
+das Volumen.</strong> - <strong>Wenn die Temperatur sinkt, verkleinert
+sich das Volumen.</strong></p>
+<p>📌 <strong>Das Gas kann sich jedoch nicht unendlich
+abkühlen.</strong> - Bei <strong>-273.15°C (0 K)</strong> hat das Gas
+<strong>kein Volumen mehr</strong>. - Diese Temperatur nennt man
+<strong>absoluten Nullpunkt</strong>.</p>
+<hr />
+<h2 id="grafische-darstellung"><strong>Grafische Darstellung</strong>
+📊</h2>
+<p>Das <strong>V-T-Diagramm</strong> zeigt eine <strong>lineare
+Beziehung</strong> zwischen <strong>Volumen und Temperatur</strong>.</p>
+<figure>
+<img src="assets/gay_lussac_graph.png" alt="Gay-Lussac-Diagramm" />
+<figcaption aria-hidden="true">Gay-Lussac-Diagramm</figcaption>
+</figure>
+<p>👉 <strong>Das Volumen nimmt proportional zur Temperatur
+zu.</strong></p>
+<hr />
+<h2 id="beispiele-berechnungen"><strong>Beispiele &amp;
+Berechnungen</strong> ✏️</h2>
+<h3 id="beispiel-heißluftballon"><strong>1️⃣ Beispiel:
+Heißluftballon</strong></h3>
+<p>Ein Heißluftballon enthält <strong>10 m³ Luft</strong> bei
+<strong>300 K (27°C)</strong>. Wie groß ist das Volumen bei <strong>600
+K (327°C)</strong>, wenn der Druck konstant bleibt?</p>
+<p><strong>Gegeben:</strong> - ( V_1 = 10 ) m³ - ( T_1 = 300 ) K - ( T_2
+= 600 ) K - ( V_2 ) = ?</p>
+<p><strong>Lösung:</strong> <span class="math display">\[
+\frac{V_1}{T_1} = \frac{V_2}{T_2}
+\]</span> <span class="math display">\[
+\frac{10}{300} = \frac{V_2}{600}
+\]</span> <span class="math display">\[
+V_2 = \frac{10 \cdot 600}{300} = 20 \,\text{m}^3
+\]</span></p>
+<p>👉 <strong>Fazit:</strong> Das Volumen hat sich
+<strong>verdoppelt</strong>, weil sich die Temperatur
+<strong>verdoppelt</strong> hat.</p>
+<hr />
+<h3 id="beispiel-luftballon-im-gefrierfach"><strong>2️⃣ Beispiel:
+Luftballon im Gefrierfach</strong></h3>
+<p>Ein Luftballon mit <strong>2 Litern</strong> Volumen ist bei
+<strong>20°C (293 K)</strong> aufgeblasen. Wie groß ist sein Volumen,
+wenn er auf <strong>-20°C (253 K)</strong> abgekühlt wird?</p>
+<p><strong>Gegeben:</strong> - ( V_1 = 2 ) L - ( T_1 = 293 ) K - ( T_2 =
+253 ) K - ( V_2 ) = ?</p>
+<p><strong>Lösung:</strong> <span class="math display">\[
+\frac{2}{293} = \frac{V_2}{253}
+\]</span> <span class="math display">\[
+V_2 = \frac{2 \cdot 253}{293} = 1.73 \,\text{L}
+\]</span></p>
+<p>👉 <strong>Fazit:</strong> Der Ballon <strong>schrumpft</strong>,
+weil die Temperatur gesenkt wurde.</p>
+<hr />
+<h2 id="anwendungen-des-gay-lussac-gesetzes"><strong>Anwendungen des
+Gay-Lussac-Gesetzes</strong> ⚙️</h2>
+<p>🔹 <strong>Heißluftballons</strong>: Erwärmte Luft nimmt mehr Volumen
+ein, wodurch der Ballon aufsteigt. 🔹 <strong>Motoren &amp;
+Turbinen</strong>: Gase dehnen sich aus, wenn sie erhitzt werden, und
+erzeugen Bewegung. 🔹 <strong>Reifen &amp; Luftdruck</strong>: Bei hohen
+Temperaturen dehnen sich Gase aus, wodurch der Reifendruck steigt. 🔹
+<strong>Wetterballons</strong>: In höheren Luftschichten nimmt der Druck
+ab, und der Ballon dehnt sich aus.</p>
+<hr />
+<h2 id="experiment-luftballon-in-kaltem-wasser"><strong>Experiment:
+Luftballon in kaltem Wasser</strong> 🎈</h2>
+<p>💡 <strong>Ein Luftballon wird in heißes und kaltes Wasser getaucht.
+Was passiert?</strong></p>
+<ul>
+<li>Im <strong>heißen Wasser</strong> dehnt er sich aus.</li>
+<li>Im <strong>kalten Wasser</strong> zieht er sich zusammen.</li>
+</ul>
+<p>👉 <strong>Grund:</strong> Die Temperaturänderung beeinflusst das
+Volumen der eingeschlossenen Luft!</p>
+<hr />
+<h2 id="aufgaben-zum-gesetz-von-gay-lussac"><strong>Aufgaben zum Gesetz
+von Gay-Lussac</strong> 📚</h2>
+<ol type="1">
+<li><p>Ein Gas hat bei <strong>25°C (298 K)</strong> ein Volumen von
+<strong>5 Litern</strong>.</p>
+<ol type="a">
+<li>Welches Volumen hat es bei <strong>100°C (373 K)</strong>?</li>
+<li>Welches Volumen hat es bei <strong>-50°C (223 K)</strong>?</li>
+</ol></li>
+<li><p>Ein Heißluftballon wird auf <strong>600 K</strong> erhitzt. Sein
+Volumen beträgt nun <strong>2000 m³</strong>.</p>
+<ol type="a">
+<li>Wie groß war das Volumen vorher, als die Luft nur <strong>300
+K</strong> hatte?</li>
+</ol></li>
+<li><p>Warum darf man <strong>Sprühdosen nicht in der Sonne</strong>
+liegen lassen?</p></li>
+<li><p>Warum muss der Reifendruck von Autos im Winter überprüft
+werden?</p></li>
+</ol>
+<hr />
+<p>📌 <strong>Zusammenfassung:</strong> ✅ Das Gesetz von Gay-Lussac
+beschreibt die <strong>Beziehung zwischen Temperatur und
+Volumen</strong> eines Gases. ✅ <strong>Formel:</strong> ( = ). ✅
+<strong>Gilt nur bei konstantem Druck</strong>. ✅
+<strong>Anwendungen:</strong> Heißluftballons, Reifen, Motoren,
+Wetterballons.</p>
+<hr />
+<p>Diese Version enthält <strong>mehr Theorie, praktische Beispiele und
+Anwendungen</strong>. Falls du noch mehr Inhalte möchtest, sag einfach
+Bescheid! 😊🚀</p></main>
+
+        <footer>
+            <p
+                xmlns:cc="http://creativecommons.org/ns#"
+                xmlns:dct="http://purl.org/dc/terms/"
+            >
+                Diese Webseite und alle Inhalte von
+                <span property="cc:attributionName">PhyLab</span> sind
+                lizenziert unter
+                <a
+                    href="https://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1"
+                    target="_blank"
+                    rel="license noopener noreferrer"
+                    style="display: inline-block"
+                    >CC BY-NC-SA 4.0</a
+                >
+
+                <img
+                    src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"
+                    alt=""
+                />
+                <img
+                    src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"
+                    alt=""
+                />
+                <img
+                    src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"
+                    alt=""
+                />
+                <img
+                    src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"
+                    alt=""
+                />
+            </p>
+        </footer>
+    </body>
+</html>

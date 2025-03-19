@@ -1,0 +1,464 @@
+<!doctype html>
+<html lang="de">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Boyle-Mariotte-Gesetz</title>
+
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+        <style>
+            body {
+                font-family: "Georgia", serif;
+                line-height: 1.6;
+                max-width: 900px;
+                margin: 0 auto;
+                padding: 40px;
+                background-color: #fafafa;
+                color: #333;
+            }
+
+            a {
+                color: #333;
+            }
+
+            header {
+                margin-bottom: 30px;
+                border-bottom: 1px solid #ccc;
+            }
+
+            header ul {
+                display: inline-block;
+            }
+
+            header ul > li {
+                display: inline-block;
+                margin-right: 1em;
+            }
+
+            h1,
+            h2,
+            h3,
+            h4 {
+                color: #005288;
+            }
+
+            h1 {
+                font-size: 2.5em;
+            }
+
+            h2 {
+                font-size: 2em;
+                padding-bottom: 5px;
+                margin-top: 40px;
+            }
+
+            hr {
+                border: none;
+                border-top: 1px solid #ccc;
+                margin: 20px 0;
+            }
+
+            nav {
+                background-color: #005288;
+                padding: 0.7em;
+                border-radius: 0.4em;
+            }
+
+            nav a {
+                color: white;
+                text-decoration: none;
+            }
+
+            nav ul {
+                list-style: none;
+                padding-left: 2ex;
+                margin: 0;
+            }
+
+            nav a.active {
+                font-weight: bold;
+                color: #ff6600; /* Orange als Highlight */
+            }
+
+            nav a:hover {
+                text-decoration: underline;
+            }
+
+            nav.breadcrumbs {
+                color: white;
+                background-color: #005288;
+                padding: 0px;
+                margin: 0px;
+            }
+
+            main {
+                margin-top: 20px;
+            }
+
+            footer {
+                margin-top: 50px;
+                border-top: 1px solid #ccc;
+                font-size: 1em;
+                text-align: center;
+                padding-top: 10px;
+            }
+
+            footer img {
+                height: 22px !important;
+                margin-left: 3px;
+                vertical-align: text-bottom;
+            }
+
+            .equation {
+                text-align: center;
+                margin: 20px 0;
+                font-size: 1.2em;
+            }
+
+            .admonition {
+                padding: 10px;
+                border-left: 5px solid;
+                border-radius: 5px;
+                margin: 10px 0;
+            }
+
+            .admonition.info {
+                background-color: #d6eaf8;
+                border-color: #3498db;
+            }
+            .admonition.note {
+                background-color: #d4efdf;
+                border-color: #2ecc71;
+            }
+            .admonition.warning {
+                background-color: #fae5d3;
+                border-color: #e67e22;
+            }
+            .admonition.example {
+                background-color: #ebdef0;
+                border-color: #9b59b6;
+            }
+
+            .admonition.formula {
+                background-color: #d1f2eb;
+                border-color: #1abc9c;
+            }
+            .admonition.problem {
+                border: 1px solid #e74c3c;
+                border-color: #e74c3c;
+            }
+            .admonition.solution {
+                background-color: #d6eaf8;
+                border-color: #2980b9;
+            }
+            .admonition.hint {
+                background-color: #eaeded;
+                border-color: #95a5a6;
+            }
+
+            .admonition.definition {
+                background-color: #fcf3cf;
+                border-color: #f1c40f;
+            }
+            .admonition.theorem {
+                background-color: #e8daef;
+                border-color: #8e44ad;
+            }
+            .admonition.experiment {
+                background-color: #d5dbdb;
+                border-color: #34495e;
+            }
+            .admonition.concept {
+                background-color: #d5f5e3;
+                border-color: #27ae60;
+            }
+
+            .admonition.historical {
+                background-color: #f5cba7;
+                border-color: #d35400;
+            }
+            .admonition.derivation {
+                background-color: #d0ece7;
+                border-color: #16a085;
+            }
+            .admonition.proof {
+                background-color: #d5d8dc;
+                border-color: #7f8c8d;
+            }
+            .admonition.realworld {
+                background-color: #f2d7d5;
+                border-color: #c0392b;
+            }
+            .admonition.faq {
+                background-color: #d4e6f1;
+                border-color: #2c3e50;
+            }
+            .admonition.check {
+                background-color: #fdebd0;
+                border-color: #f39c12;
+            }
+
+            .solution-box {
+                border: 1px solid #2980b9;
+                background-color: #d6eaf8;
+                padding: 10px;
+                margin: 10px 0;
+                border-radius: 5px;
+            }
+
+            .solution-box summary {
+                font-weight: bold;
+                cursor: pointer;
+                padding: 5px;
+            }
+
+            pre,
+            code {
+                background-color: #eee;
+                border-radius: 3px;
+                padding: 3px 6px;
+                font-family: "Courier New", Courier, monospace;
+            }
+
+            pre {
+                padding: 10px;
+                overflow-x: auto;
+            }
+
+            img {
+                max-width: 100%;
+                height: auto;
+            }
+
+            table {
+                border-collapse: collapse;
+                width: 100%;
+            }
+
+            th,
+            td {
+                border-bottom: 1px solid #ddd;
+                padding: 8px;
+                text-align: left;
+            }
+
+            th {
+                background-color: #f2f2f2;
+            }
+
+            tr:nth-child(even) {
+                background-color: #f9f9f9;
+            }
+            tr:nth-child(odd) {
+                background-color: #ffffff;
+            }
+
+            ol[type="a"] {
+                list-style: none; /* Entferne Standard-Listensymbole */
+                counter-reset: list-counter; /* Initialisiere Zähler */
+                padding-left: 0em;
+            }
+
+            ol[type="a"] > li {
+                counter-increment: list-counter; /* Zähler erhöhen */
+                margin-bottom: 1em;
+            }
+
+            ol[type="a"] > li::before {
+                content: counter(list-counter, lower-alpha) ") "; /* a) b) c) */
+            }
+        </style>
+    </head>
+
+    <body>
+        <nav>
+             <nav class='breadcrumbs'><a href="../../index.html">Physikbuch</a> > <a href="../index.html">Wärmelehre</a> > <a href="index.html">Ideales Gas</a></nav> 
+             <nav><ul><li><a href="index.html">Ideales Gas</a></li><li><a href="boyle-marriote.html" class="active">Boyle-Mariotte-Gesetz</a></li><li><a href="gay-lussac.html">Gesetz von Gay-Lussac</a></li><li><a href="allgemeine_gasgleichung.html">Allgemeine Gasgleichung</a></li></ul></nav> 
+        </nav>
+
+        <header>
+            <h1>Boyle-Mariotte-Gesetz</h1>
+            <p>Autoren:  T. Jenni </p>
+            <p> Datum: 8.3.2024 </p>
+        </header>
+
+        <main><h2 id="das-boyle-mariotte-gesetz"><strong>Das
+Boyle-Mariotte-Gesetz</strong> 📏⚗️</h2>
+<p>Das <strong>Boyle-Mariotte-Gesetz</strong> beschreibt den
+Zusammenhang zwischen <strong>Druck</strong> und
+<strong>Volumen</strong> eines idealen Gases bei <strong>konstanter
+Temperatur</strong>.</p>
+<p><strong>Formel:</strong> <span class="math display">\[
+p \cdot V = \text{konstant}
+\]</span></p>
+<p><strong>Bedeutung der Variablen:</strong> - <strong>( p )</strong> =
+Druck (Pa) - <strong>( V )</strong> = Volumen (m³)</p>
+<p><strong>Gesetzmäßigkeit:</strong> - <strong>Wenn das Volumen
+verkleinert wird, steigt der Druck.</strong> - <strong>Wenn das Volumen
+vergrößert wird, sinkt der Druck.</strong></p>
+<p>👉 <strong>Das Produkt aus Druck und Volumen bleibt konstant, solange
+die Temperatur unverändert bleibt.</strong></p>
+<hr />
+<h2 id="mathematische-darstellung"><strong>Mathematische
+Darstellung</strong> ✍️</h2>
+<p>Vergleicht man zwei verschiedene Zustände eines Gases, gilt:</p>
+<p><span class="math display">\[
+p_1 \cdot V_1 = p_2 \cdot V_2
+\]</span></p>
+<ul>
+<li><strong>( p_1, V_1 )</strong> = Druck und Volumen im ersten
+Zustand</li>
+<li><strong>( p_2, V_2 )</strong> = Druck und Volumen im zweiten
+Zustand</li>
+</ul>
+<p>Dies bedeutet, dass sich <strong>Druck und Volumen umgekehrt
+proportional verhalten</strong>: - <strong>Halbiert man das Volumen,
+verdoppelt sich der Druck.</strong> - <strong>Verdoppelt man das
+Volumen, halbiert sich der Druck.</strong></p>
+<p>📌 <strong>Wichtig:</strong> Dieses Gesetz gilt <strong>nur für
+ideale Gase</strong> und wenn die <strong>Temperatur konstant
+bleibt</strong>.</p>
+<hr />
+<h2 id="grafische-darstellung"><strong>Grafische Darstellung</strong>
+📊</h2>
+<p>Das <strong>p-V-Diagramm</strong> zeigt eine
+<strong>Hyperbel</strong>, weil <strong>Druck und Volumen umgekehrt
+proportional</strong> sind.</p>
+<figure>
+<img src="assets/boyle_mariotte_graph.png" alt="Boyle-Mariotte-Kurve" />
+<figcaption aria-hidden="true">Boyle-Mariotte-Kurve</figcaption>
+</figure>
+<p>👉 Je <strong>höher der Druck</strong>, desto <strong>kleiner das
+Volumen</strong>.</p>
+<hr />
+<h2 id="beispiele-berechnungen"><strong>Beispiele &amp;
+Berechnungen</strong> ✏️</h2>
+<h3 id="beispiel-pressluftflasche-beim-tauchen"><strong>1️⃣ Beispiel:
+Pressluftflasche beim Tauchen</strong></h3>
+<p>Eine Pressluftflasche enthält <strong>10 Liter Luft</strong> bei
+<strong>200 bar</strong>. Wie groß wäre das Volumen der Luft, wenn der
+Druck auf <strong>1 bar</strong> sinkt?</p>
+<p><strong>Gegeben:</strong> - ( p_1 = 200 ) bar - ( V_1 = 10 ) Liter -
+( p_2 = 1 ) bar - ( V_2 ) = ?</p>
+<p><strong>Lösung:</strong> <span class="math display">\[
+p_1 \cdot V_1 = p_2 \cdot V_2
+\]</span> <span class="math display">\[
+200 \cdot 10 = 1 \cdot V_2
+\]</span> <span class="math display">\[
+V_2 = 2000 \,\text{Liter}
+\]</span></p>
+<p>👉 <strong>Fazit:</strong> Die Luftmenge in der Flasche würde sich
+auf <strong>2000 Liter ausdehnen</strong>, wenn sie auf Normaldruck
+kommt.</p>
+<hr />
+<h3 id="beispiel-fahrradpumpe"><strong>2️⃣ Beispiel:
+Fahrradpumpe</strong></h3>
+<p>In einer Fahrradpumpe wird die Luft von <strong>200 cm³ auf 50
+cm³</strong> komprimiert. Wie verändert sich der Druck, wenn die
+Temperatur konstant bleibt?</p>
+<p><strong>Gegeben:</strong> - ( V_1 = 200 ) cm³ - ( p_1 = 1 ) bar - (
+V_2 = 50 ) cm³ - ( p_2 ) = ?</p>
+<p><strong>Lösung:</strong> <span class="math display">\[
+p_1 \cdot V_1 = p_2 \cdot V_2
+\]</span> <span class="math display">\[
+1 \cdot 200 = p_2 \cdot 50
+\]</span> <span class="math display">\[
+p_2 = \frac{200}{50} = 4 \,\text{bar}
+\]</span></p>
+<p>👉 <strong>Fazit:</strong> Durch das <strong>Verkleinern des
+Volumens</strong> auf ein <strong>Viertel</strong> steigt der Druck auf
+das <strong>Vierfache (4 bar).</strong></p>
+<hr />
+<h2 id="anwendungen-des-boyle-mariotte-gesetzes"><strong>Anwendungen des
+Boyle-Mariotte-Gesetzes</strong> ⚙️</h2>
+<p>🔹 <strong>Tauchen:</strong> Beim Auftauchen dehnt sich das Gas in
+der Lunge aus. Zu schnelles Auftauchen kann zur
+<strong>Dekompressionskrankheit</strong> führen. 🔹 <strong>Spritzen
+&amp; Kolbenmotoren:</strong> Beim Zurückziehen eines Spritzenkolbens
+nimmt das Volumen zu, der Druck sinkt, und Flüssigkeit wird eingesaugt.
+🔹 <strong>Luftballons:</strong> Wenn man einen Ballon zusammendrückt,
+steigt der Druck im Inneren, weil sich das Volumen verringert. 🔹
+<strong>Vakuumverpackungen:</strong> Beim Entfernen von Luft
+(Drucksenkung) dehnt sich das Verpackungsmaterial aus.</p>
+<hr />
+<h2 id="experiment-ballon-im-vakuum"><strong>Experiment: Ballon im
+Vakuum</strong> 🎈</h2>
+<p><strong>Was passiert mit einem Ballon, wenn man ihn in eine
+Vakuumkammer legt?</strong> 💡 <strong>Er dehnt sich aus!</strong></p>
+<p><strong>Warum?</strong> Da der <strong>äußere Druck gesenkt
+wird</strong>, bleibt das Produkt ( p V ) konstant → das Volumen muss
+<strong>größer</strong> werden.</p>
+<hr />
+<h2 id="aufgaben-zum-boyle-mariotte-gesetz"><strong>Aufgaben zum
+Boyle-Mariotte-Gesetz</strong> 📚</h2>
+<ol type="1">
+<li><p>Ein Gas hat ein Volumen von <strong>5 Litern</strong> bei
+<strong>3 bar</strong>.</p>
+<ol type="a">
+<li>Welches Volumen hat es bei <strong>1 bar</strong>?</li>
+<li>Welches Volumen hat es bei <strong>6 bar</strong>?</li>
+</ol></li>
+<li><p>In einem Zylinder wird die Luft von <strong>10 Litern</strong>
+auf <strong>2 Liter</strong> zusammengedrückt.</p>
+<ol type="a">
+<li>Wie verändert sich der Druck, wenn er vorher <strong>1 bar</strong>
+betrug?</li>
+</ol></li>
+<li><p>Warum muss ein Taucher langsam auftauchen, um Schäden durch das
+Boyle-Mariotte-Gesetz zu vermeiden?</p></li>
+<li><p>Ein Autoreifen enthält Luft mit einem Volumen von <strong>50
+Litern</strong> bei <strong>2 bar</strong>.</p>
+<ol type="a">
+<li>Wie groß wäre das Volumen der Luft außerhalb des Reifens bei
+<strong>1 bar</strong>?</li>
+</ol></li>
+</ol>
+<hr />
+<p>📌 <strong>Zusammenfassung:</strong> ✅ Das Boyle-Mariotte-Gesetz
+besagt, dass <strong>Druck und Volumen eines Gases umgekehrt
+proportional sind</strong>. ✅ <strong>Formel:</strong> ( p V = ). ✅
+<strong>Gilt nur bei konstanter Temperatur</strong> für <strong>ideale
+Gase</strong>. ✅ <strong>Typische Anwendungen:</strong> Tauchen,
+Fahrradpumpen, Vakuumverpackungen.</p>
+<hr />
+<p>Diese Version enthält <strong>mehr Theorie, praktische Beispiele und
+Anwendungen</strong>. Falls du noch mehr Inhalte möchtest, sag einfach
+Bescheid! 😊🚀</p></main>
+
+        <footer>
+            <p
+                xmlns:cc="http://creativecommons.org/ns#"
+                xmlns:dct="http://purl.org/dc/terms/"
+            >
+                Diese Webseite und alle Inhalte von
+                <span property="cc:attributionName">PhyLab</span> sind
+                lizenziert unter
+                <a
+                    href="https://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1"
+                    target="_blank"
+                    rel="license noopener noreferrer"
+                    style="display: inline-block"
+                    >CC BY-NC-SA 4.0</a
+                >
+
+                <img
+                    src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"
+                    alt=""
+                />
+                <img
+                    src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"
+                    alt=""
+                />
+                <img
+                    src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"
+                    alt=""
+                />
+                <img
+                    src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"
+                    alt=""
+                />
+            </p>
+        </footer>
+    </body>
+</html>

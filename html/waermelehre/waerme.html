@@ -1,0 +1,509 @@
+<!doctype html>
+<html lang="de">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Wärme</title>
+
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+        <style>
+            body {
+                font-family: "Georgia", serif;
+                line-height: 1.6;
+                max-width: 900px;
+                margin: 0 auto;
+                padding: 40px;
+                background-color: #fafafa;
+                color: #333;
+            }
+
+            a {
+                color: #333;
+            }
+
+            header {
+                margin-bottom: 30px;
+                border-bottom: 1px solid #ccc;
+            }
+
+            header ul {
+                display: inline-block;
+            }
+
+            header ul > li {
+                display: inline-block;
+                margin-right: 1em;
+            }
+
+            h1,
+            h2,
+            h3,
+            h4 {
+                color: #005288;
+            }
+
+            h1 {
+                font-size: 2.5em;
+            }
+
+            h2 {
+                font-size: 2em;
+                padding-bottom: 5px;
+                margin-top: 40px;
+            }
+
+            hr {
+                border: none;
+                border-top: 1px solid #ccc;
+                margin: 20px 0;
+            }
+
+            nav {
+                background-color: #005288;
+                padding: 0.7em;
+                border-radius: 0.4em;
+            }
+
+            nav a {
+                color: white;
+                text-decoration: none;
+            }
+
+            nav ul {
+                list-style: none;
+                padding-left: 2ex;
+                margin: 0;
+            }
+
+            nav a.active {
+                font-weight: bold;
+                color: #ff6600; /* Orange als Highlight */
+            }
+
+            nav a:hover {
+                text-decoration: underline;
+            }
+
+            nav.breadcrumbs {
+                color: white;
+                background-color: #005288;
+                padding: 0px;
+                margin: 0px;
+            }
+
+            main {
+                margin-top: 20px;
+            }
+
+            footer {
+                margin-top: 50px;
+                border-top: 1px solid #ccc;
+                font-size: 1em;
+                text-align: center;
+                padding-top: 10px;
+            }
+
+            footer img {
+                height: 22px !important;
+                margin-left: 3px;
+                vertical-align: text-bottom;
+            }
+
+            .equation {
+                text-align: center;
+                margin: 20px 0;
+                font-size: 1.2em;
+            }
+
+            .admonition {
+                padding: 10px;
+                border-left: 5px solid;
+                border-radius: 5px;
+                margin: 10px 0;
+            }
+
+            .admonition.info {
+                background-color: #d6eaf8;
+                border-color: #3498db;
+            }
+            .admonition.note {
+                background-color: #d4efdf;
+                border-color: #2ecc71;
+            }
+            .admonition.warning {
+                background-color: #fae5d3;
+                border-color: #e67e22;
+            }
+            .admonition.example {
+                background-color: #ebdef0;
+                border-color: #9b59b6;
+            }
+
+            .admonition.formula {
+                background-color: #d1f2eb;
+                border-color: #1abc9c;
+            }
+            .admonition.problem {
+                border: 1px solid #e74c3c;
+                border-color: #e74c3c;
+            }
+            .admonition.solution {
+                background-color: #d6eaf8;
+                border-color: #2980b9;
+            }
+            .admonition.hint {
+                background-color: #eaeded;
+                border-color: #95a5a6;
+            }
+
+            .admonition.definition {
+                background-color: #fcf3cf;
+                border-color: #f1c40f;
+            }
+            .admonition.theorem {
+                background-color: #e8daef;
+                border-color: #8e44ad;
+            }
+            .admonition.experiment {
+                background-color: #d5dbdb;
+                border-color: #34495e;
+            }
+            .admonition.concept {
+                background-color: #d5f5e3;
+                border-color: #27ae60;
+            }
+
+            .admonition.historical {
+                background-color: #f5cba7;
+                border-color: #d35400;
+            }
+            .admonition.derivation {
+                background-color: #d0ece7;
+                border-color: #16a085;
+            }
+            .admonition.proof {
+                background-color: #d5d8dc;
+                border-color: #7f8c8d;
+            }
+            .admonition.realworld {
+                background-color: #f2d7d5;
+                border-color: #c0392b;
+            }
+            .admonition.faq {
+                background-color: #d4e6f1;
+                border-color: #2c3e50;
+            }
+            .admonition.check {
+                background-color: #fdebd0;
+                border-color: #f39c12;
+            }
+
+            .solution-box {
+                border: 1px solid #2980b9;
+                background-color: #d6eaf8;
+                padding: 10px;
+                margin: 10px 0;
+                border-radius: 5px;
+            }
+
+            .solution-box summary {
+                font-weight: bold;
+                cursor: pointer;
+                padding: 5px;
+            }
+
+            pre,
+            code {
+                background-color: #eee;
+                border-radius: 3px;
+                padding: 3px 6px;
+                font-family: "Courier New", Courier, monospace;
+            }
+
+            pre {
+                padding: 10px;
+                overflow-x: auto;
+            }
+
+            img {
+                max-width: 100%;
+                height: auto;
+            }
+
+            table {
+                border-collapse: collapse;
+                width: 100%;
+            }
+
+            th,
+            td {
+                border-bottom: 1px solid #ddd;
+                padding: 8px;
+                text-align: left;
+            }
+
+            th {
+                background-color: #f2f2f2;
+            }
+
+            tr:nth-child(even) {
+                background-color: #f9f9f9;
+            }
+            tr:nth-child(odd) {
+                background-color: #ffffff;
+            }
+
+            ol[type="a"] {
+                list-style: none; /* Entferne Standard-Listensymbole */
+                counter-reset: list-counter; /* Initialisiere Zähler */
+                padding-left: 0em;
+            }
+
+            ol[type="a"] > li {
+                counter-increment: list-counter; /* Zähler erhöhen */
+                margin-bottom: 1em;
+            }
+
+            ol[type="a"] > li::before {
+                content: counter(list-counter, lower-alpha) ") "; /* a) b) c) */
+            }
+        </style>
+    </head>
+
+    <body>
+        <nav>
+             <nav class='breadcrumbs'><a href="../index.html">Physikbuch</a> > <a href="index.html">Wärmelehre</a></nav> 
+             <nav><ul><li><a href="index.html">Wärmelehre</a></li><li><a href="thermische_ausdehnung.html">Thermische Ausdehnung</a></li><li><a href="waerme.html" class="active">Wärme</a></li><li><a href="druck.html">Druck</a></li><li><a href="ideales_gas/index.html">Ideales Gas</a></li></ul></nav> 
+        </nav>
+
+        <header>
+            <h1>Wärme</h1>
+            <p>Autoren:  T. Jenni </p>
+            <p> Datum: 8.3.2024 </p>
+        </header>
+
+        <main><h2 id="was-ist-wärme"><strong>Was ist
+Wärme?</strong></h2>
+<p>Wärme ((Q)) ist eine <strong>Energieform</strong>, die durch
+Temperaturunterschiede von einem Körper auf einen anderen übertragen
+wird. Sie kann durch <strong>Leitung, Strahlung oder Konvektion</strong>
+weitergegeben werden.</p>
+<p>📌 <strong>Einheit der Wärme:</strong> - Die Einheit der Wärmeenergie
+ist <strong>Joule (J)</strong>. - Eine veraltete Einheit ist die
+<strong>Kalorie (cal)</strong>, wobei gilt: ( 1, = 4.186, ).</p>
+<hr />
+<h2 id="spezifische-wärmekapazität"><strong>Spezifische
+Wärmekapazität</strong></h2>
+<p>Die <strong>spezifische Wärmekapazität</strong> (( c )) gibt an,
+<strong>wie viel Energie benötigt wird, um 1 kg eines Stoffes um 1 K zu
+erwärmen</strong>.</p>
+<p><strong>Formel:</strong> <span class="math display">\[ Q = m \cdot c
+\cdot \Delta T \]</span></p>
+<h3 id="bedeutung-der-größen"><strong>Bedeutung der
+Größen:</strong></h3>
+<ul>
+<li>( Q ) = Wärmemenge (Joule, J)</li>
+<li>( m ) = Masse (Kilogramm, kg)</li>
+<li>( c ) = spezifische Wärmekapazität (J/kg·K)</li>
+<li>( T ) = Temperaturänderung (K oder °C)</li>
+</ul>
+<h3 id="typische-werte-für-c"><strong>Typische Werte für ( c
+):</strong></h3>
+<table>
+<thead>
+<tr>
+<th>Material</th>
+<th>Spezifische Wärmekapazität ( c ) (J/kg·K)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Wasser</td>
+<td>4186 J/kg·K</td>
+</tr>
+<tr>
+<td>Eisen</td>
+<td>450 J/kg·K</td>
+</tr>
+<tr>
+<td>Kupfer</td>
+<td>385 J/kg·K</td>
+</tr>
+<tr>
+<td>Aluminium</td>
+<td>900 J/kg·K</td>
+</tr>
+</tbody>
+</table>
+<p>👉 <strong>Wasser hat eine sehr hohe Wärmekapazität</strong> –
+deshalb wird es als <strong>Kühlmittel in Heizungen, Motoren und
+Klimaanlagen</strong> genutzt.</p>
+<hr />
+<h2 id="beispiele-berechnungen"><strong>Beispiele &amp;
+Berechnungen</strong></h2>
+<h3 id="beispiel-erwärmung-von-wasser"><strong>1️⃣ Beispiel: Erwärmung
+von Wasser</strong></h3>
+<p>Ein <strong>Wasserkocher mit 2 Litern Wasser</strong> wird von
+<strong>20°C auf 100°C</strong> erhitzt.</p>
+<p>Gegeben: - ( m = 2 ) kg - ( c_{} = 4186 ) J/kg·K - ( T = 100 - 20 =
+80 ) K</p>
+<p>Berechnung:</p>
+<p><span class="math display">\[
+Q = m \cdot c \cdot \Delta T
+\]</span> <span class="math display">\[
+Q = 2 \cdot 4186 \cdot 80
+\]</span> <span class="math display">\[
+Q = 669760 \,\text{J} = 670 \,\text{kJ}
+\]</span></p>
+<p>👉 <strong>Fazit:</strong> Um <strong>2 Liter Wasser um 80°C zu
+erhitzen, braucht man etwa 670 kJ Energie</strong>.</p>
+<hr />
+<h3 id="beispiel-abkühlung-eines-heißen-eisenstücks"><strong>2️⃣
+Beispiel: Abkühlung eines heißen Eisenstücks</strong></h3>
+<p>Ein <strong>heißes Stück Eisen mit 5 kg</strong> kühlt von
+<strong>500°C auf 100°C</strong> ab.</p>
+<p>Gegeben: - ( m = 5 ) kg - ( c_{} = 450 ) J/kg·K - ( T = 100 - 500 =
+-400 ) K</p>
+<p>Berechnung:</p>
+<p><span class="math display">\[
+Q = 5 \cdot 450 \cdot (-400)
+\]</span> <span class="math display">\[
+Q = -900000 \,\text{J}
+\]</span></p>
+<p>👉 <strong>Fazit:</strong> Das Eisen gibt <strong>900 kJ
+Wärme</strong> an die Umgebung ab.</p>
+<hr />
+<h2 id="wärmeübertragung"><strong>Wärmeübertragung</strong></h2>
+<h3 id="wärmeleitung"><strong>1️⃣ Wärmeleitung</strong></h3>
+<ul>
+<li>Wärme wird durch direkten Kontakt zwischen <strong>festen
+Stoffen</strong> übertragen.</li>
+<li><strong>Beispiele:</strong>
+<ul>
+<li>Ein Metalllöffel in heißem Tee wird warm.</li>
+<li>Heizkörper erwärmen Luft durch Kontakt.</li>
+</ul></li>
+</ul>
+<h3 id="wärmestrahlung"><strong>2️⃣ Wärmestrahlung</strong></h3>
+<ul>
+<li>Wärme wird als <strong>elektromagnetische Wellen
+(Infrarotstrahlung)</strong> übertragen.</li>
+<li><strong>Beispiele:</strong>
+<ul>
+<li>Die Sonne erwärmt die Erde.</li>
+<li>Ein Lagerfeuer strahlt Wärme ab.</li>
+</ul></li>
+</ul>
+<h3 id="wärmeströmung-konvektion"><strong>3️⃣ Wärmeströmung
+(Konvektion)</strong></h3>
+<ul>
+<li>Wärme wird durch <strong>bewegte Teilchen in Flüssigkeiten &amp;
+Gasen</strong> transportiert.</li>
+<li><strong>Beispiele:</strong>
+<ul>
+<li>Warme Luft steigt auf, kalte sinkt ab (Winde, Wetter).</li>
+<li>Wasser wird in einem Kochtopf durch Strömungen erhitzt.</li>
+</ul></li>
+</ul>
+<hr />
+<h2
+id="aggregatzustandsänderungen"><strong>Aggregatzustandsänderungen</strong></h2>
+<p>Neben der Temperaturerhöhung kann Wärme auch einen
+<strong>Aggregatzustandswechsel</strong> verursachen, ohne die
+Temperatur zu ändern:</p>
+<table>
+<thead>
+<tr>
+<th>Übergang</th>
+<th>Name</th>
+<th>Beispiel</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>fest → flüssig</strong></td>
+<td><strong>Schmelzen</strong></td>
+<td>Eis wird zu Wasser</td>
+</tr>
+<tr>
+<td><strong>flüssig → gasförmig</strong></td>
+<td><strong>Verdampfen</strong></td>
+<td>Wasser kocht</td>
+</tr>
+<tr>
+<td><strong>gasförmig → flüssig</strong></td>
+<td><strong>Kondensieren</strong></td>
+<td>Wolkenbildung</td>
+</tr>
+<tr>
+<td><strong>flüssig → fest</strong></td>
+<td><strong>Erstarren</strong></td>
+<td>Wasser gefriert</td>
+</tr>
+</tbody>
+</table>
+<p>🔹 <strong>Wichtig:</strong> Beim <strong>Schmelzen und
+Verdampfen</strong> wird <strong>Energie aufgenommen</strong>, beim
+<strong>Erstarren und Kondensieren</strong> wird <strong>Energie
+abgegeben</strong>.</p>
+<hr />
+<h2 id="aufgaben-zur-wärmelehre"><strong>Aufgaben zur
+Wärmelehre</strong></h2>
+<ol type="1">
+<li>Berechne, wie viel Energie nötig ist, um <strong>500 g Wasser von
+10°C auf 90°C</strong> zu erwärmen.</li>
+<li>Ein <strong>Eisenblock (3 kg)</strong> kühlt von <strong>400°C auf
+50°C</strong> ab. Wie viel Wärme wird abgegeben?</li>
+<li>Ein <strong>Aluminiumstück mit 2 kg</strong> wird um <strong>100
+K</strong> erhitzt. Wie viel Energie ist nötig?</li>
+<li>Warum fühlt sich ein <strong>Metallgriff kälter</strong> an als ein
+<strong>Holzgriff</strong>, obwohl beide Raumtemperatur haben?</li>
+<li>Warum trägt ein <strong>schwarzes Auto</strong> im Sommer mehr Wärme
+auf als ein <strong>weißes Auto</strong>?</li>
+</ol>
+<hr />
+<p>📌 <strong>Zusammenfassung:</strong> - Wärme ist eine
+<strong>Energieform</strong>, die zwischen Körpern übertragen wird. -
+Die <strong>spezifische Wärmekapazität</strong> beschreibt, wie viel
+Energie ein Stoff speichern kann. - Wärme wird durch <strong>Leitung,
+Strahlung oder Konvektion</strong> übertragen. - Aggregatzustände ändern
+sich durch Wärmezufuhr oder -abgabe.</p>
+<hr /></main>
+
+        <footer>
+            <p
+                xmlns:cc="http://creativecommons.org/ns#"
+                xmlns:dct="http://purl.org/dc/terms/"
+            >
+                Diese Webseite und alle Inhalte von
+                <span property="cc:attributionName">PhyLab</span> sind
+                lizenziert unter
+                <a
+                    href="https://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1"
+                    target="_blank"
+                    rel="license noopener noreferrer"
+                    style="display: inline-block"
+                    >CC BY-NC-SA 4.0</a
+                >
+
+                <img
+                    src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"
+                    alt=""
+                />
+                <img
+                    src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"
+                    alt=""
+                />
+                <img
+                    src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"
+                    alt=""
+                />
+                <img
+                    src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"
+                    alt=""
+                />
+            </p>
+        </footer>
+    </body>
+</html>

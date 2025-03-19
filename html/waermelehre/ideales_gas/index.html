@@ -1,0 +1,395 @@
+<!doctype html>
+<html lang="de">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Ideales Gas</title>
+
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+        <style>
+            body {
+                font-family: "Georgia", serif;
+                line-height: 1.6;
+                max-width: 900px;
+                margin: 0 auto;
+                padding: 40px;
+                background-color: #fafafa;
+                color: #333;
+            }
+
+            a {
+                color: #333;
+            }
+
+            header {
+                margin-bottom: 30px;
+                border-bottom: 1px solid #ccc;
+            }
+
+            header ul {
+                display: inline-block;
+            }
+
+            header ul > li {
+                display: inline-block;
+                margin-right: 1em;
+            }
+
+            h1,
+            h2,
+            h3,
+            h4 {
+                color: #005288;
+            }
+
+            h1 {
+                font-size: 2.5em;
+            }
+
+            h2 {
+                font-size: 2em;
+                padding-bottom: 5px;
+                margin-top: 40px;
+            }
+
+            hr {
+                border: none;
+                border-top: 1px solid #ccc;
+                margin: 20px 0;
+            }
+
+            nav {
+                background-color: #005288;
+                padding: 0.7em;
+                border-radius: 0.4em;
+            }
+
+            nav a {
+                color: white;
+                text-decoration: none;
+            }
+
+            nav ul {
+                list-style: none;
+                padding-left: 2ex;
+                margin: 0;
+            }
+
+            nav a.active {
+                font-weight: bold;
+                color: #ff6600; /* Orange als Highlight */
+            }
+
+            nav a:hover {
+                text-decoration: underline;
+            }
+
+            nav.breadcrumbs {
+                color: white;
+                background-color: #005288;
+                padding: 0px;
+                margin: 0px;
+            }
+
+            main {
+                margin-top: 20px;
+            }
+
+            footer {
+                margin-top: 50px;
+                border-top: 1px solid #ccc;
+                font-size: 1em;
+                text-align: center;
+                padding-top: 10px;
+            }
+
+            footer img {
+                height: 22px !important;
+                margin-left: 3px;
+                vertical-align: text-bottom;
+            }
+
+            .equation {
+                text-align: center;
+                margin: 20px 0;
+                font-size: 1.2em;
+            }
+
+            .admonition {
+                padding: 10px;
+                border-left: 5px solid;
+                border-radius: 5px;
+                margin: 10px 0;
+            }
+
+            .admonition.info {
+                background-color: #d6eaf8;
+                border-color: #3498db;
+            }
+            .admonition.note {
+                background-color: #d4efdf;
+                border-color: #2ecc71;
+            }
+            .admonition.warning {
+                background-color: #fae5d3;
+                border-color: #e67e22;
+            }
+            .admonition.example {
+                background-color: #ebdef0;
+                border-color: #9b59b6;
+            }
+
+            .admonition.formula {
+                background-color: #d1f2eb;
+                border-color: #1abc9c;
+            }
+            .admonition.problem {
+                border: 1px solid #e74c3c;
+                border-color: #e74c3c;
+            }
+            .admonition.solution {
+                background-color: #d6eaf8;
+                border-color: #2980b9;
+            }
+            .admonition.hint {
+                background-color: #eaeded;
+                border-color: #95a5a6;
+            }
+
+            .admonition.definition {
+                background-color: #fcf3cf;
+                border-color: #f1c40f;
+            }
+            .admonition.theorem {
+                background-color: #e8daef;
+                border-color: #8e44ad;
+            }
+            .admonition.experiment {
+                background-color: #d5dbdb;
+                border-color: #34495e;
+            }
+            .admonition.concept {
+                background-color: #d5f5e3;
+                border-color: #27ae60;
+            }
+
+            .admonition.historical {
+                background-color: #f5cba7;
+                border-color: #d35400;
+            }
+            .admonition.derivation {
+                background-color: #d0ece7;
+                border-color: #16a085;
+            }
+            .admonition.proof {
+                background-color: #d5d8dc;
+                border-color: #7f8c8d;
+            }
+            .admonition.realworld {
+                background-color: #f2d7d5;
+                border-color: #c0392b;
+            }
+            .admonition.faq {
+                background-color: #d4e6f1;
+                border-color: #2c3e50;
+            }
+            .admonition.check {
+                background-color: #fdebd0;
+                border-color: #f39c12;
+            }
+
+            .solution-box {
+                border: 1px solid #2980b9;
+                background-color: #d6eaf8;
+                padding: 10px;
+                margin: 10px 0;
+                border-radius: 5px;
+            }
+
+            .solution-box summary {
+                font-weight: bold;
+                cursor: pointer;
+                padding: 5px;
+            }
+
+            pre,
+            code {
+                background-color: #eee;
+                border-radius: 3px;
+                padding: 3px 6px;
+                font-family: "Courier New", Courier, monospace;
+            }
+
+            pre {
+                padding: 10px;
+                overflow-x: auto;
+            }
+
+            img {
+                max-width: 100%;
+                height: auto;
+            }
+
+            table {
+                border-collapse: collapse;
+                width: 100%;
+            }
+
+            th,
+            td {
+                border-bottom: 1px solid #ddd;
+                padding: 8px;
+                text-align: left;
+            }
+
+            th {
+                background-color: #f2f2f2;
+            }
+
+            tr:nth-child(even) {
+                background-color: #f9f9f9;
+            }
+            tr:nth-child(odd) {
+                background-color: #ffffff;
+            }
+
+            ol[type="a"] {
+                list-style: none; /* Entferne Standard-Listensymbole */
+                counter-reset: list-counter; /* Initialisiere Zähler */
+                padding-left: 0em;
+            }
+
+            ol[type="a"] > li {
+                counter-increment: list-counter; /* Zähler erhöhen */
+                margin-bottom: 1em;
+            }
+
+            ol[type="a"] > li::before {
+                content: counter(list-counter, lower-alpha) ") "; /* a) b) c) */
+            }
+        </style>
+    </head>
+
+    <body>
+        <nav>
+             <nav class='breadcrumbs'><a href="../../index.html">Physikbuch</a> > <a href="../index.html">Wärmelehre</a> > <a href="index.html">Ideales Gas</a></nav> 
+             <nav><ul><li><a href="index.html" class="active">Ideales Gas</a></li><li><a href="boyle-marriote.html">Boyle-Mariotte-Gesetz</a></li><li><a href="gay-lussac.html">Gesetz von Gay-Lussac</a></li><li><a href="allgemeine_gasgleichung.html">Allgemeine Gasgleichung</a></li></ul></nav> 
+        </nav>
+
+        <header>
+            <h1>Ideales Gas</h1>
+            <p>Autoren:  T. Jenni </p>
+            <p> Datum: 8.3.2024 </p>
+        </header>
+
+        <main><p>Das <strong>Modell des idealen Gases</strong> ist eine
+<strong>vereinfachte Beschreibung von Gasen</strong>, die uns hilft, ihr
+Verhalten zu verstehen. Es basiert auf folgenden Annahmen:</p>
+<p>🔹 Gasmoleküle sind <strong>punktförmig</strong> und haben
+<strong>keine Wechselwirkungen</strong> untereinander. 🔹 Die Teilchen
+bewegen sich <strong>zufällig</strong> und stoßen
+<strong>elastisch</strong> aneinander und an die Wände des Behälters. 🔹
+Die <strong>mittlere kinetische Energie</strong> der Teilchen hängt nur
+von der <strong>Temperatur</strong> ab.</p>
+<p>👉 <strong>Das ideale Gasmodell ist eine Näherung</strong>, die für
+viele Gase bei <strong>niedrigem Druck und hoher Temperatur</strong>
+sehr gut funktioniert.</p>
+<hr />
+<h2 id="überblick-über-die-kapitel"><strong>Überblick über die
+Kapitel</strong> 📖</h2>
+<p>In diesem Kapitel beschäftigen wir uns mit den <strong>grundlegenden
+Gasgesetzen</strong> und deren Anwendungen:</p>
+<h3 id="das-boyle-mariotte-gesetz-druck-volumen"><strong>1️⃣ Das
+Boyle-Mariotte-Gesetz (Druck &amp; Volumen)</strong></h3>
+<p>📌 <strong>Wie verändert sich das Volumen eines Gases, wenn der Druck
+steigt oder sinkt?</strong> 📎 <strong>Formel:</strong> ( p V = ) 👉
+<strong>Wenn das Volumen halbiert wird, verdoppelt sich der
+Druck!</strong></p>
+<p>🔗 <a href="boyle_mariotte.html">Mehr dazu im Kapitel
+Boyle-Mariotte</a></p>
+<hr />
+<h3 id="das-gesetz-von-gay-lussac-volumen-temperatur"><strong>2️⃣ Das
+Gesetz von Gay-Lussac (Volumen &amp; Temperatur)</strong></h3>
+<p>📌 <strong>Wie verändert sich das Volumen eines Gases, wenn es
+erhitzt oder abgekühlt wird?</strong> 📎 <strong>Formel:</strong> ( = )
+👉 <strong>Wenn sich die Temperatur verdoppelt, verdoppelt sich das
+Volumen!</strong></p>
+<p>🔗 <a href="gay_lussac.html">Mehr dazu im Kapitel Gay-Lussac</a></p>
+<hr />
+<h3 id="das-allgemeine-gasgesetz"><strong>3️⃣ Das allgemeine
+Gasgesetz</strong></h3>
+<p>📌 <strong>Kombiniert die Gesetze von Boyle-Mariotte und
+Gay-Lussac:</strong> 📎 <strong>Formel:</strong> <span
+class="math display">\[
+p \cdot V = n \cdot R \cdot T
+\]</span> 🔹 <strong>( p )</strong> = Druck (Pa) 🔹 <strong>( V
+)</strong> = Volumen (m³) 🔹 <strong>( n )</strong> = Stoffmenge (mol)
+🔹 <strong>( R )</strong> = Gaskonstante (8.314 J/mol·K) 🔹 <strong>( T
+)</strong> = Temperatur (K)</p>
+<p>🔗 <a href="ideale_gasgleichung.html">Mehr dazu im Kapitel Ideale
+Gasgleichung</a></p>
+<hr />
+<h3 id="kinetische-gastheorie"><strong>4️⃣ Kinetische
+Gastheorie</strong></h3>
+<p>📌 <strong>Warum üben Gase Druck aus?</strong> 📌 <strong>Wie hängt
+die Temperatur mit der Molekülbewegung zusammen?</strong></p>
+<p>🔗 <a href="kinetische_gastheorie.html">Mehr dazu im Kapitel
+Kinetische Gastheorie</a></p>
+<hr />
+<h2 id="anwendungen-der-gasgesetze"><strong>Anwendungen der
+Gasgesetze</strong> 🚀</h2>
+<p>Die Gesetze der idealen Gase haben viele Anwendungen, darunter: -
+<strong>Luftballons &amp; Heißluftballons</strong> 🏀 – Warum dehnen sie
+sich bei Wärme aus? - <strong>Reifendruck</strong> 🚗 – Warum ändert
+sich der Druck mit der Temperatur? - <strong>Wetterballons</strong> 🎈 –
+Warum steigen sie auf und platzen irgendwann? - <strong>Tauchen</strong>
+🤿 – Warum müssen Taucher langsam auftauchen? - <strong>Motoren &amp;
+Kolben</strong> 🛠️ – Wie nutzen Verbrennungsmotoren die
+Gasausdehnung?</p>
+<hr />
+<h2 id="zusammenfassung"><strong>Zusammenfassung</strong> ✍️</h2>
+<p>✅ Das ideale Gasmodell beschreibt <strong>Gase unter normalen
+Bedingungen</strong> gut. ✅ <strong>Druck, Volumen und
+Temperatur</strong> hängen voneinander ab. ✅ Die <strong>Gasgesetze
+helfen</strong>, viele alltägliche Phänomene zu verstehen.</p>
+<hr />
+<p>🔗 <strong>Tauche ein in die Welt der Gase! Klicke auf die einzelnen
+Kapitel, um mehr zu erfahren!</strong> 🌍💨</p></main>
+
+        <footer>
+            <p
+                xmlns:cc="http://creativecommons.org/ns#"
+                xmlns:dct="http://purl.org/dc/terms/"
+            >
+                Diese Webseite und alle Inhalte von
+                <span property="cc:attributionName">PhyLab</span> sind
+                lizenziert unter
+                <a
+                    href="https://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1"
+                    target="_blank"
+                    rel="license noopener noreferrer"
+                    style="display: inline-block"
+                    >CC BY-NC-SA 4.0</a
+                >
+
+                <img
+                    src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"
+                    alt=""
+                />
+                <img
+                    src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"
+                    alt=""
+                />
+                <img
+                    src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"
+                    alt=""
+                />
+                <img
+                    src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"
+                    alt=""
+                />
+            </p>
+        </footer>
+    </body>
+</html>

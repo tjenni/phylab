@@ -1,0 +1,99 @@
+% https://github.com/jgm/pandoc-templates/blob/master/common.latex
+
+\documentclass[a4paper,12pt]{article}
+
+% Schriftarten & Zeichenkodierung
+\usepackage{fontspec}
+%\setmainfont{Noto Serif} % Alternativ: Georgia, falls installiert
+\usepackage{polyglossia}
+\setmainlanguage{german}
+
+
+\usepackage{luacode} % Needed for direct Lua code execution in LaTeX
+
+% Add the emoji fallback mechanism using LuaLaTeX
+\directlua{
+    luaotfload.add_fallback("emojifallback", {
+        "Noto Color Emoji:mode=harf;script=DFLT;"
+    })
+}
+
+% Set the main and sans-serif fonts with emoji fallback
+\setmainfont{Source Sans Pro}[RawFeature={fallback=emojifallback}]
+\setsansfont{Source Sans Pro}[RawFeature={fallback=emojifallback}]
+
+% Optional: Load emoji-specific package if you plan to use emoji characters via name
+\usepackage{emo}
+
+
+
+% Mathe & Symbole
+\usepackage{amsmath, amssymb}
+\usepackage{unicode-math}
+\setmathfont{TeX Gyre Termes Math} % Mathe-Font
+
+% Seitenlayout & Farben
+\usepackage[left=2.5cm, right=2.5cm, top=3cm, bottom=3cm]{geometry}
+\usepackage{xcolor}
+\definecolor{titleblue}{RGB}{0, 82, 136} % HTML-Farbe für Titel
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{longtable}
+\usepackage{booktabs}
+\usepackage{array}      % Erweitertes Tabellendesign
+\usepackage{tabularx}   % Flexible Tabellenbreiten
+
+\graphicspath{{assets/}}
+
+% Abschnittsformatierung
+\usepackage{titlesec}
+\titleformat{\section}{\large\bfseries\color{titleblue}}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalsize\bfseries\color{titleblue}}{\thesubsection}{1em}{}
+
+% 🛠️ FIX: Definiere \tightlist für Pandoc
+\providecommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+% 🛠️ FIX: Definiere \pandocbounded für Pandoc
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+\makeatother
+
+% Fix für \real{}
+\def\real#1{#1}  % Ersetzt \real{} durch den Wert
+
+% Kopf- und Fußzeilen
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\textcolor{titleblue}{$title$}}
+\fancyfoot[C]{\thepage}
+
+% Titelseite
+\title{\textbf{\textcolor{titleblue}{$title$}}}
+\author{$if(author)$$author$$else$PhyLab Team$endif$}
+\date{$if(date)$$date$$else$\today$endif$}
+
+\begin{document}
+\maketitle
+
+% Hauptinhalt
+$body$
+
+% Fußzeile mit Creative Commons Lizenz
+\vfill
+\noindent\rule{\textwidth}{0.5pt}
+\noindent{\footnotesize
+This document by the PhyLab Team is licensed under a
+\textbf{Creative Commons Attribution-NonCommercial-ShareAlike 4.0 License}
+\url{https://creativecommons.org/licenses/by-nc-sa/4.0/}.}
+
+\end{document}

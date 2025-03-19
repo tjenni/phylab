@@ -1,0 +1,413 @@
+<!doctype html>
+<html lang="de">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Wärmelehre</title>
+
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+        <style>
+            body {
+                font-family: "Georgia", serif;
+                line-height: 1.6;
+                max-width: 900px;
+                margin: 0 auto;
+                padding: 40px;
+                background-color: #fafafa;
+                color: #333;
+            }
+
+            a {
+                color: #333;
+            }
+
+            header {
+                margin-bottom: 30px;
+                border-bottom: 1px solid #ccc;
+            }
+
+            header ul {
+                display: inline-block;
+            }
+
+            header ul > li {
+                display: inline-block;
+                margin-right: 1em;
+            }
+
+            h1,
+            h2,
+            h3,
+            h4 {
+                color: #005288;
+            }
+
+            h1 {
+                font-size: 2.5em;
+            }
+
+            h2 {
+                font-size: 2em;
+                padding-bottom: 5px;
+                margin-top: 40px;
+            }
+
+            hr {
+                border: none;
+                border-top: 1px solid #ccc;
+                margin: 20px 0;
+            }
+
+            nav {
+                background-color: #005288;
+                padding: 0.7em;
+                border-radius: 0.4em;
+            }
+
+            nav a {
+                color: white;
+                text-decoration: none;
+            }
+
+            nav ul {
+                list-style: none;
+                padding-left: 2ex;
+                margin: 0;
+            }
+
+            nav a.active {
+                font-weight: bold;
+                color: #ff6600; /* Orange als Highlight */
+            }
+
+            nav a:hover {
+                text-decoration: underline;
+            }
+
+            nav.breadcrumbs {
+                color: white;
+                background-color: #005288;
+                padding: 0px;
+                margin: 0px;
+            }
+
+            main {
+                margin-top: 20px;
+            }
+
+            footer {
+                margin-top: 50px;
+                border-top: 1px solid #ccc;
+                font-size: 1em;
+                text-align: center;
+                padding-top: 10px;
+            }
+
+            footer img {
+                height: 22px !important;
+                margin-left: 3px;
+                vertical-align: text-bottom;
+            }
+
+            .equation {
+                text-align: center;
+                margin: 20px 0;
+                font-size: 1.2em;
+            }
+
+            .admonition {
+                padding: 10px;
+                border-left: 5px solid;
+                border-radius: 5px;
+                margin: 10px 0;
+            }
+
+            .admonition.info {
+                background-color: #d6eaf8;
+                border-color: #3498db;
+            }
+            .admonition.note {
+                background-color: #d4efdf;
+                border-color: #2ecc71;
+            }
+            .admonition.warning {
+                background-color: #fae5d3;
+                border-color: #e67e22;
+            }
+            .admonition.example {
+                background-color: #ebdef0;
+                border-color: #9b59b6;
+            }
+
+            .admonition.formula {
+                background-color: #d1f2eb;
+                border-color: #1abc9c;
+            }
+            .admonition.problem {
+                border: 1px solid #e74c3c;
+                border-color: #e74c3c;
+            }
+            .admonition.solution {
+                background-color: #d6eaf8;
+                border-color: #2980b9;
+            }
+            .admonition.hint {
+                background-color: #eaeded;
+                border-color: #95a5a6;
+            }
+
+            .admonition.definition {
+                background-color: #fcf3cf;
+                border-color: #f1c40f;
+            }
+            .admonition.theorem {
+                background-color: #e8daef;
+                border-color: #8e44ad;
+            }
+            .admonition.experiment {
+                background-color: #d5dbdb;
+                border-color: #34495e;
+            }
+            .admonition.concept {
+                background-color: #d5f5e3;
+                border-color: #27ae60;
+            }
+
+            .admonition.historical {
+                background-color: #f5cba7;
+                border-color: #d35400;
+            }
+            .admonition.derivation {
+                background-color: #d0ece7;
+                border-color: #16a085;
+            }
+            .admonition.proof {
+                background-color: #d5d8dc;
+                border-color: #7f8c8d;
+            }
+            .admonition.realworld {
+                background-color: #f2d7d5;
+                border-color: #c0392b;
+            }
+            .admonition.faq {
+                background-color: #d4e6f1;
+                border-color: #2c3e50;
+            }
+            .admonition.check {
+                background-color: #fdebd0;
+                border-color: #f39c12;
+            }
+
+            .solution-box {
+                border: 1px solid #2980b9;
+                background-color: #d6eaf8;
+                padding: 10px;
+                margin: 10px 0;
+                border-radius: 5px;
+            }
+
+            .solution-box summary {
+                font-weight: bold;
+                cursor: pointer;
+                padding: 5px;
+            }
+
+            pre,
+            code {
+                background-color: #eee;
+                border-radius: 3px;
+                padding: 3px 6px;
+                font-family: "Courier New", Courier, monospace;
+            }
+
+            pre {
+                padding: 10px;
+                overflow-x: auto;
+            }
+
+            img {
+                max-width: 100%;
+                height: auto;
+            }
+
+            table {
+                border-collapse: collapse;
+                width: 100%;
+            }
+
+            th,
+            td {
+                border-bottom: 1px solid #ddd;
+                padding: 8px;
+                text-align: left;
+            }
+
+            th {
+                background-color: #f2f2f2;
+            }
+
+            tr:nth-child(even) {
+                background-color: #f9f9f9;
+            }
+            tr:nth-child(odd) {
+                background-color: #ffffff;
+            }
+
+            ol[type="a"] {
+                list-style: none; /* Entferne Standard-Listensymbole */
+                counter-reset: list-counter; /* Initialisiere Zähler */
+                padding-left: 0em;
+            }
+
+            ol[type="a"] > li {
+                counter-increment: list-counter; /* Zähler erhöhen */
+                margin-bottom: 1em;
+            }
+
+            ol[type="a"] > li::before {
+                content: counter(list-counter, lower-alpha) ") "; /* a) b) c) */
+            }
+        </style>
+    </head>
+
+    <body>
+        <nav>
+             <nav class='breadcrumbs'><a href="../index.html">Physikbuch</a> > <a href="index.html">Wärmelehre</a></nav> 
+             <nav><ul><li><a href="index.html" class="active">Wärmelehre</a></li><li><a href="thermische_ausdehnung.html">Thermische Ausdehnung</a></li><li><a href="waerme.html">Wärme</a></li><li><a href="druck.html">Druck</a></li><li><a href="ideales_gas/index.html">Ideales Gas</a></li></ul></nav> 
+        </nav>
+
+        <header>
+            <h1>Wärmelehre</h1>
+            <p>Autoren:  T. Jenni </p>
+            <p> Datum: 8.3.2024 </p>
+        </header>
+
+        <main><h2 id="einleitung-die-wärmelehre"><strong>Einleitung: Die
+Wärmelehre</strong> 🔥</h2>
+<p>Die <strong>Wärmelehre (Thermodynamik)</strong> beschäftigt sich mit
+der <strong>Energie in Form von Wärme</strong>, deren
+<strong>Übertragung</strong> und den <strong>Eigenschaften von
+Stoffen</strong> bei Temperaturänderungen. Wärme ist eine
+<strong>Energieform</strong>, die durch verschiedene Prozesse von einem
+Körper auf einen anderen übertragen werden kann.</p>
+<p>💡 <strong>Zentrale Fragen der Wärmelehre:</strong> - <strong>Was ist
+Wärme?</strong> 🔥 - <strong>Wie verändert sich die Temperatur eines
+Körpers?</strong> 🌡️ - <strong>Wie beeinflusst Wärme das Volumen von
+Stoffen?</strong> 📏 - <strong>Wie funktioniert
+Wärmeübertragung?</strong> 🏠💨 - <strong>Welche Energieumwandlungen
+gibt es?</strong> ⚡</p>
+<p>👉 <strong>Das Verständnis der Wärmelehre ist entscheidend für viele
+technische Anwendungen, von Motoren bis zu Klimaanlagen.</strong></p>
+<hr />
+<h2 id="überblick-über-die-kapitel"><strong>Überblick über die
+Kapitel</strong> 📖</h2>
+<h3 id="wärme-und-temperatur"><strong>1️⃣ Wärme und
+Temperatur</strong></h3>
+<p>📌 <strong>Was ist der Unterschied zwischen Wärme und
+Temperatur?</strong> 📎 <strong>Formel:</strong> ( Q = m c T ) 👉
+<strong>Wie kann man Wärme speichern oder transportieren?</strong></p>
+<p>🔗 <a href="waerme.html">Mehr dazu im Kapitel Wärme</a></p>
+<hr />
+<h3 id="thermische-ausdehnung"><strong>2️⃣ Thermische
+Ausdehnung</strong></h3>
+<p>📌 <strong>Warum dehnen sich Materialien bei Wärme aus?</strong> 📎
+<strong>Formel:</strong> ( l = l_0 T ) 👉 <strong>Warum gibt es
+Dehnungsfugen in Brücken?</strong></p>
+<p>🔗 <a href="thermische_ausdehnung.html">Mehr dazu im Kapitel
+Thermische Ausdehnung</a></p>
+<hr />
+<h3 id="druck-und-temperatur"><strong>3️⃣ Druck und
+Temperatur</strong></h3>
+<p>📌 <strong>Wie hängt die Temperatur mit dem Druck zusammen?</strong>
+📎 <strong>Gesetz von Gay-Lussac</strong>: ( = ) 👉 <strong>Warum steigt
+der Druck in Autoreifen bei Wärme?</strong></p>
+<p>🔗 <a href="druck.html">Mehr dazu im Kapitel Druck</a></p>
+<hr />
+<h3 id="wärmeübertragung"><strong>4️⃣ Wärmeübertragung</strong></h3>
+<p>📌 <strong>Wie wird Wärme übertragen?</strong> 🔹
+<strong>Leitung</strong> – Metall erwärmt sich schnell 🔥 🔹
+<strong>Strahlung</strong> – Sonne erwärmt die Erde ☀️ 🔹
+<strong>Konvektion</strong> – Warme Luft steigt auf 🌬️ 👉 <strong>Warum
+kühlt ein heißes Getränk schneller ab, wenn man es umrührt?</strong></p>
+<p>🔗 <a href="waermeuebertragung.html">Mehr dazu im Kapitel
+Wärmeübertragung</a></p>
+<hr />
+<h3 id="aggregatzustände-und-phasenübergänge"><strong>5️⃣
+Aggregatzustände und Phasenübergänge</strong></h3>
+<p>📌 <strong>Warum kann Wärme einen Stoff schmelzen oder
+verdampfen?</strong> 📎 <strong>Schmelz- &amp;
+Verdampfungswärme</strong>: ( Q = m L ) 👉 <strong>Warum schwitzt der
+Mensch zur Kühlung?</strong></p>
+<p>🔗 <a href="phasenuebergaenge.html">Mehr dazu im Kapitel
+Phasenübergänge</a></p>
+<hr />
+<h3 id="die-gesetze-der-thermodynamik"><strong>6️⃣ Die Gesetze der
+Thermodynamik</strong></h3>
+<p>📌 <strong>Welche Regeln bestimmen die Energieflüsse in
+Systemen?</strong> - <strong>1. Hauptsatz:</strong> Energie bleibt
+erhalten. - <strong>2. Hauptsatz:</strong> Wärme fließt von heiß nach
+kalt. - <strong>3. Hauptsatz:</strong> Absoluter Nullpunkt ist
+unerreichbar. 👉 <strong>Warum kann man keine Maschine bauen, die
+unendlich Energie erzeugt?</strong></p>
+<p>🔗 <a href="thermodynamik.html">Mehr dazu im Kapitel Thermodynamische
+Gesetze</a></p>
+<hr />
+<h2 id="anwendungen-der-wärmelehre"><strong>Anwendungen der
+Wärmelehre</strong> 🚀</h2>
+<p>Die Gesetze der Wärmelehre haben viele Anwendungen, darunter: -
+<strong>Motoren &amp; Kraftwerke</strong> ⚙️ – Wie wandeln wir Wärme in
+Bewegung um? - <strong>Kühlschränke &amp; Klimaanlagen</strong> ❄️ –
+Warum entzieht ein Kühlschrank dem Innenraum Wärme? -
+<strong>Wärmedämmung</strong> 🏠 – Warum hält eine Thermosflasche
+Getränke warm oder kalt? - <strong>Wetter &amp; Klima</strong> 🌍 –
+Warum beeinflusst Wärme Luftströmungen und Wetterphänomene?</p>
+<hr />
+<h2 id="zusammenfassung"><strong>Zusammenfassung</strong> ✍️</h2>
+<p>✅ Wärme ist eine <strong>Energieform</strong>, die zwischen Körpern
+übertragen wird. ✅ Wärme kann <strong>durch Leitung, Strahlung oder
+Konvektion</strong> transportiert werden. ✅ Temperaturänderungen führen
+oft zur <strong>thermischen Ausdehnung von Materialien</strong>. ✅
+Aggregatzustände ändern sich durch Wärmezufuhr oder -abgabe. ✅ Die
+<strong>Hauptsätze der Thermodynamik</strong> regeln alle Prozesse in
+der Wärmelehre.</p>
+<hr />
+<p>🔗 <strong>Tauche ein in die Welt der Wärme! Klicke auf die einzelnen
+Kapitel, um mehr zu erfahren!</strong> 🌍🔥</p></main>
+
+        <footer>
+            <p
+                xmlns:cc="http://creativecommons.org/ns#"
+                xmlns:dct="http://purl.org/dc/terms/"
+            >
+                Diese Webseite und alle Inhalte von
+                <span property="cc:attributionName">PhyLab</span> sind
+                lizenziert unter
+                <a
+                    href="https://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1"
+                    target="_blank"
+                    rel="license noopener noreferrer"
+                    style="display: inline-block"
+                    >CC BY-NC-SA 4.0</a
+                >
+
+                <img
+                    src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"
+                    alt=""
+                />
+                <img
+                    src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"
+                    alt=""
+                />
+                <img
+                    src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"
+                    alt=""
+                />
+                <img
+                    src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"
+                    alt=""
+                />
+            </p>
+        </footer>
+    </body>
+</html>
