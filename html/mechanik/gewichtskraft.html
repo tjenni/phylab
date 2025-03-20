@@ -144,59 +144,30 @@
                 background-color: #d1f2eb;
                 border-color: #1abc9c;
             }
+
             .admonition.problem {
-                border: 1px solid #e74c3c;
-                border-color: #e74c3c;
+                border: none;
+                margin: 0;
+                padding: 0;
             }
+
+            .admonition.problem .visual {
+                width: 40%;
+            }
+
             .admonition.solution {
                 background-color: #d6eaf8;
                 border-color: #2980b9;
             }
+
             .admonition.hint {
                 background-color: #eaeded;
                 border-color: #95a5a6;
             }
 
-            .admonition.definition {
-                background-color: #fcf3cf;
-                border-color: #f1c40f;
-            }
-            .admonition.theorem {
-                background-color: #e8daef;
-                border-color: #8e44ad;
-            }
-            .admonition.experiment {
-                background-color: #d5dbdb;
-                border-color: #34495e;
-            }
             .admonition.concept {
                 background-color: #d5f5e3;
                 border-color: #27ae60;
-            }
-
-            .admonition.historical {
-                background-color: #f5cba7;
-                border-color: #d35400;
-            }
-            .admonition.derivation {
-                background-color: #d0ece7;
-                border-color: #16a085;
-            }
-            .admonition.proof {
-                background-color: #d5d8dc;
-                border-color: #7f8c8d;
-            }
-            .admonition.realworld {
-                background-color: #f2d7d5;
-                border-color: #c0392b;
-            }
-            .admonition.faq {
-                background-color: #d4e6f1;
-                border-color: #2c3e50;
-            }
-            .admonition.check {
-                background-color: #fdebd0;
-                border-color: #f39c12;
             }
 
             .solution-box {
@@ -417,28 +388,39 @@ g \cdot \cos(\alpha) \]</span></p>
 herunter, wenn keine Gegenkraft wirkt!</strong></p>
 <hr />
 <h2 id="aufgaben"><strong>Aufgaben</strong></h2>
-<div class="admonition problem">
-<p><strong>Aufgabe 1</strong></p>
-<p>Berechne die Gewichtskraft eines <strong>5 kg schweren
-Rucksacks</strong> auf der Erde.</p>
-</div>
+<section id="aufgabe-1" class="admonition problem">
+<h3>Aufgabe 1</h3>
+<!--- base_path: source/mechanik/aufgaben -->
+<figure>
+<img src="assets/rucksack.jpg" class="visual"
+alt="Rucksack (Bild: Omar Roque / Unsplash)" />
+<figcaption aria-hidden="true">Rucksack (Bild: Omar Roque /
+Unsplash)</figcaption>
+</figure>
+<p>Wenn man mit dem Rucksack unterwegs ist, möchte man wissen, wie
+schwer der Rucksack ist. Berechne die Gewichtskraft eines <strong>5 kg
+schweren Rucksacks</strong> auf der Erde.</p>
 <details class='solution-box'>
 <summary><strong>Lösung anzeigen</strong></summary>
 <p><span
 class="math display"><em>F</em><sub><em>G</em></sub> = <em>m</em> ⋅ <em>g</em> = 5 kg ⋅ 9.81 m/s<sup>2</sup> = 49.05 N</span></p>
 </details>
+<!--- base_path: build/mechanik -->
+</section>
 <hr />
-<div class="admonition problem">
-<p><strong>Aufgabe 2</strong></p>
+<section id="aufgabe-2" class="admonition problem">
+<h3>Aufgabe 2</h3>
+<!--- base_path: source/mechanik/aufgaben -->
 <p>Wie gross wäre die Gewichtskraft des Rucksacks <strong>auf dem
 Mond</strong> (<span class="math inline">\(g =
 1.62\,\text{m/s}^2\)</span>)?</p>
-</div>
 <details class='solution-box'>
 <summary><strong>Lösung anzeigen</strong></summary>
 <p><span
 class="math display"><em>F</em><sub><em>G</em></sub> = <em>m</em> ⋅ <em>g</em> = 5 kg ⋅ 1.62 m/s<sup>2</sup> = 8.1 N</span></p>
 </details>
+<!--- base_path: build/mechanik -->
+</section>
 <hr />
 <div class="admonition problem">
 <p><strong>Aufgabe 3</strong></p>
