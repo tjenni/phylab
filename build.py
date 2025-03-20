@@ -182,7 +182,7 @@ def clear_and_create_dir(directory: Path):
 
 
 include_cache = {}
-def resolve_includes(file: Path, source: Path, build: Path):
+def resolve_includes(file: Path, source: Path, build: Path, remove_yaml_header=False):
     """ Resolve all !include statements """
 
     if file in include_cache:
@@ -193,10 +193,13 @@ def resolve_includes(file: Path, source: Path, build: Path):
         include_cache[file] = None
         return f"[Fehlendes Include: {file}]\n"
 
-    content = Path(file).read_text(encoding="utf-8").splitlines()
+    if remove_yaml_header:
+        yaml, content = parse_yaml(file)
+    else:
+        content = file.read_text(encoding="utf-8")
 
     resolved_content = []
-    for line in content:
+    for line in content.splitlines():
         match = re.match(r'^\s*!include\s+(["\']?)([^"\']+)\1\s*$', line.strip())
 
         if match:
@@ -208,7 +211,16 @@ def resolve_includes(file: Path, source: Path, build: Path):
 
             if include_file.exists():
                 print("include:", include_file)
-                resolved_content.append(resolve_includes(include_file, source, build))
+
+                # Vor dem Include: Quellverzeichnis einfügen
+                resolved_content.append(f"<!--- base_path: {include_file.parent} -->")
+
+                # Inhalt der Include-Datei einfügen
+                resolved_content.append(resolve_includes(include_file, source, build, True))
+
+                # Nach dem Include: Zielverzeichnis einfügen
+                resolved_content.append(f"<!--- base_path: {file.parent} -->")
+
             else:
                 print(f"⚠️ Warnung: Datei nicht gefunden: {include_file}")
                 resolved_content.append(f"\n[Fehlendes Include: {include_file}]\n")
@@ -232,7 +244,55 @@ def handle_includes(source: Path, build: Path):
         md_file.write_text(resolved_content, encoding="utf-8")
 
 
+def copy_embedded_assets(source: Path, build: Path):
+    """ Kopiert alle referenzierten Bilder unter Berücksichtigung von base_path in das Build-Verzeichnis """
 
+    processed_assets = set()
+
+    for md_file in Path(build).rglob("*.md"):
+        content = Path(md_file).read_text(encoding="utf-8").splitlines()
+
+        # Standard base_path ist das Verzeichnis der Markdown-Datei
+        current_base_path = source / md_file.parent.relative_to(build)
+
+        resolved_content = []
+        for line in content:
+            # Prüfe auf base_path Anweisung
+            match_base_path = re.match(r'<!---\s*base_path:\s*(.*?)\s*-->', line)
+            if match_base_path:
+                current_base_path = Path(match_base_path.group(1))
+                print(f"base_path gesetzt auf: {current_base_path}")
+                continue
+
+            # Prüfe auf Bildreferenzen
+            match_asset = re.match(r'!\[(.*?)\]\((.*?)\)', line)
+            if match_asset:
+                asset_file_rel = match_asset.group(2)
+                asset_path = Path(asset_file_rel)
+
+                # Bestimme den Quell- und Zielpfad basierend auf base_path
+                target_file = md_file.parent / asset_path
+                source_file = current_base_path / asset_path
+
+                if source_file in processed_assets:
+                    continue
+
+                if source_file.exists():
+                    target_file.parent.mkdir(parents=True, exist_ok=True)
+
+                    try:
+                        shutil.copy(source_file, target_file)
+                        processed_assets.add(source_file)
+                        print(f"Kopiert: {source_file}")
+                    except (FileNotFoundError, PermissionError) as e:
+                        print(f"⚠️ Warnung: Fehler beim Kopieren: {source_file} ({e})")
+
+                else:
+                    print(f"⚠️ Warnung: Datei nicht gefunden: {source_file}")
+
+
+
+'''
 def copy_embedded_assets(source: Path, build: Path):
     """ Copies all referenced images into the build directory """
 
@@ -268,7 +328,7 @@ def copy_embedded_assets(source: Path, build: Path):
 
             else:
                 print(f"⚠️ Warnung: Datei nicht gefunden: {source_file}")
-
+'''
 
 
 def copy_static_assets(build: Path, target: Path):

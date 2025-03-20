@@ -93,27 +93,17 @@ $$ F_{\perp} = m \cdot g \cdot \cos(\alpha) $$
 ## **Aufgaben**
 
 ::: problem
-**Aufgabe 1**
+### Aufgabe 1
 
-Berechne die Gewichtskraft eines **5 kg schweren Rucksacks** auf der Erde.
-:::
-
-::: solution
-
-$$ F_G = m \cdot g = 5\,\text{kg} \cdot 9.81\,\text{m/s}^2 = 49.05\,\text{N} $$
+!include "aufgaben/rucksack.md"
 :::
 
 ---
 
 ::: problem
-**Aufgabe 2**
+### Aufgabe 2
 
-Wie gross wäre die Gewichtskraft des Rucksacks **auf dem Mond** ($g = 1.62\,\text{m/s}^2$)?
-:::
-
-::: solution
-
-$$ F_G = m \cdot g = 5\,\text{kg} \cdot 1.62\,\text{m/s}^2 = 8.1\,\text{N} $$
+!include "aufgaben/mond.md"
 :::
 
 ---
